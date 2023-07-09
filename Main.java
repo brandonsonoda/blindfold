@@ -18,6 +18,16 @@ public class Main {
         continue;
       }
 
+      if (line.equalsIgnoreCase("color")) {
+        Color.setPrintMode(Color.PrintMode.COLOR);
+        continue;
+      }
+
+      if (line.equalsIgnoreCase("text")) {
+        Color.setPrintMode(Color.PrintMode.TEXT);
+        continue;
+      }
+
       if (line.equalsIgnoreCase("is_solved")) {
         System.out.println(c.isCubeSolved());
         continue;

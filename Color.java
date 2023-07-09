@@ -7,8 +7,15 @@
    YELLOW(5, "\u001B[38;2;255;210;0m");
 
    public static final String ANSI_RESET = "\u001B[0m";
+
    final int code;
    final String ansiCode;
+
+   enum PrintMode {
+     TEXT, COLOR
+   }
+
+   private static PrintMode printMode = PrintMode.COLOR;
 
     Color(int code, String ansiCode) {
       this.code = code;
@@ -16,6 +23,13 @@
     }
 
     public String toString() {
-      return String.format(" %s■%s ", ansiCode, ANSI_RESET);
+      return
+        printMode == PrintMode.TEXT
+        ? String.format("%s[%d]", ANSI_RESET, code)
+        : String.format(" %s■%s ", ansiCode, ANSI_RESET);
+    }
+
+    static void setPrintMode(PrintMode printMode) {
+      Color.printMode = printMode;
     }
   }
