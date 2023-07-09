@@ -1,5 +1,4 @@
 import java.util.stream.Stream;
-import java.util.Iterator;
 
 class Cube {
   private static final String EMPTY_SLOT = "         ";
