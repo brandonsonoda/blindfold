@@ -22,7 +22,7 @@ public enum Turn {
   x_PRIME("x'", x, x, x),
   y("y"),
   y2("y2", y, y),
-  y_PRIME("x'", y, y, y),
+  y_PRIME("y'", y, y, y),
   z("z"),
   z2("z2", z, z),
   z_PRIME("z'", z, z, z),

@@ -16,6 +16,6 @@
     }
 
     public String toString() {
-      return String.format("%s ■%s ", ansiCode, ANSI_RESET);
+      return String.format(" %s■%s ", ansiCode, ANSI_RESET);
     }
   }
