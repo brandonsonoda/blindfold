@@ -1,18 +1,21 @@
   enum Color {
-    WHITE(0),
-    ORANGE(1),
-    GREEN(2),
-    RED(3),
-    BLUE(4),
-    YELLOW(5);
+   WHITE(0, "\u001B[37m"),
+   ORANGE(1, "\u001B[38;2;255;88;0m"),
+   GREEN(2, "\u001B[38;2;0;155;72m"),
+   RED(3, "\u001B[38;2;183;18;52m"),
+   BLUE(4, "\u001B[38;2;0;70;173m"),
+   YELLOW(5, "\u001B[38;2;255;210;0m");
 
-    final int code;
+   public static final String ANSI_RESET = "\u001B[0m";
+   final int code;
+   final String ansiCode;
 
-    Color(int code) {
+    Color(int code, String ansiCode) {
       this.code = code;
+      this.ansiCode = ansiCode;
     }
 
     public String toString() {
-      return String.format("%d", code);
+      return String.format("%s ■%s ", ansiCode, ANSI_RESET);
     }
   }

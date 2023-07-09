@@ -2,7 +2,7 @@ import java.util.stream.Stream;
 
 class Cube {
   private static final String EMPTY_SLOT = "         ";
-  private static final String SINGLE_FACE =  "[%s][%s][%s]";
+  private static final String SINGLE_FACE =  "%s%s%s";
   private Color[][] state = new Color[6][9]; //nice
 
   public Cube() {
