@@ -175,10 +175,6 @@ class Cube {
     state[getFace(position2)][getFacePosition(position2)] = buffer;
   }
 
-  private static String printRow(Color a, Color b, Color c) {
-    return String.format("[%s][%s][%s]", a.code, b.code, c.code);
-  }
-
   public String toString() {
     return
       // TOP FACE
