@@ -176,30 +176,41 @@ class Cube {
   }
 
   public String toString() {
+    // 2-side PLL String
+    // return printCube(0b000000111000000111000000000000000000111111111L);
+    return printCube(-1);
+  }
+
+  public String printCube(long mask) {
     return
       // TOP FACE
-      EMPTY_SLOT + String.format(SINGLE_FACE, state[0][0], state[0][1], state[0][2]) + "\n" +
-      EMPTY_SLOT + String.format(SINGLE_FACE, state[0][3], state[0][4], state[0][5]) + "\n" + 
-      EMPTY_SLOT + String.format(SINGLE_FACE, state[0][6], state[0][7], state[0][8]) + "\n" +
+      EMPTY_SLOT + String.format(SINGLE_FACE, getState(mask, 0, 0), getState(mask, 0, 1), getState(mask, 0, 2)) + "\n" +
+      EMPTY_SLOT + String.format(SINGLE_FACE, getState(mask, 0, 3), getState(mask, 0, 4), getState(mask, 0, 5)) + "\n" + 
+      EMPTY_SLOT + String.format(SINGLE_FACE, getState(mask, 0, 6), getState(mask, 0, 7), getState(mask, 0, 8)) + "\n" +
       //  Middle Band 1
-      String.format(SINGLE_FACE, state[1][0], state[1][1], state[1][2]) +
-      String.format(SINGLE_FACE, state[2][0], state[2][1], state[2][2]) +
-      String.format(SINGLE_FACE, state[3][0], state[3][1], state[3][2]) + 
-      String.format(SINGLE_FACE, state[4][0], state[4][1], state[4][2]) +  "\n" +
+      String.format(SINGLE_FACE, getState(mask, 1, 0), getState(mask, 1, 1), getState(mask, 1, 2)) +
+      String.format(SINGLE_FACE, getState(mask, 2, 0), getState(mask, 2, 1), getState(mask, 2, 2)) +
+      String.format(SINGLE_FACE, getState(mask, 3, 0), getState(mask, 3, 1), getState(mask, 3, 2)) + 
+      String.format(SINGLE_FACE, getState(mask, 4, 0), getState(mask, 4, 1), getState(mask, 4, 2)) +  "\n" +
       //  Middle Band 2
-      String.format(SINGLE_FACE, state[1][3], state[1][4], state[1][5]) +
-      String.format(SINGLE_FACE, state[2][3], state[2][4], state[2][5]) +
-      String.format(SINGLE_FACE, state[3][3], state[3][4], state[3][5]) +
-      String.format(SINGLE_FACE, state[4][3], state[4][4], state[4][5]) + "\n" + 
+      String.format(SINGLE_FACE, getState(mask, 1, 3), getState(mask, 1, 4), getState(mask, 1, 5)) +
+      String.format(SINGLE_FACE, getState(mask, 2, 3), getState(mask, 2, 4), getState(mask, 2, 5)) +
+      String.format(SINGLE_FACE, getState(mask, 3, 3), getState(mask, 3, 4), getState(mask, 3, 5)) +
+      String.format(SINGLE_FACE, getState(mask, 4, 3), getState(mask, 4, 4), getState(mask, 4, 5)) + "\n" + 
       //  Middle Band 2
-      String.format(SINGLE_FACE, state[1][6], state[1][7], state[1][8]) +
-      String.format(SINGLE_FACE, state[2][6], state[2][7], state[2][8]) +
-      String.format(SINGLE_FACE, state[3][6], state[3][7], state[3][8]) +
-      String.format(SINGLE_FACE, state[4][6], state[4][7], state[4][8]) +  "\n" +
+      String.format(SINGLE_FACE, getState(mask, 1, 6), getState(mask, 1, 7), getState(mask, 1, 8)) +
+      String.format(SINGLE_FACE, getState(mask, 2, 6), getState(mask, 2, 7), getState(mask, 2, 8)) +
+      String.format(SINGLE_FACE, getState(mask, 3, 6), getState(mask, 3, 7), getState(mask, 3, 8)) +
+      String.format(SINGLE_FACE, getState(mask, 4, 6), getState(mask, 4, 7), getState(mask, 4, 8)) +  "\n" +
       // BOTTOM FACE
-      EMPTY_SLOT + String.format(SINGLE_FACE, state[5][0], state[5][1], state[5][2]) + "\n" +
-      EMPTY_SLOT + String.format(SINGLE_FACE, state[5][3], state[5][4], state[5][5]) + "\n" + 
-      EMPTY_SLOT + String.format(SINGLE_FACE, state[5][6], state[5][7], state[5][8]);
+      EMPTY_SLOT + String.format(SINGLE_FACE, getState(mask, 5, 0), getState(mask, 5, 1), getState(mask, 5, 2)) + "\n" +
+      EMPTY_SLOT + String.format(SINGLE_FACE, getState(mask, 5, 3), getState(mask, 5, 4), getState(mask, 5, 5)) + "\n" + 
+      EMPTY_SLOT + String.format(SINGLE_FACE, getState(mask, 5, 6), getState(mask, 5, 7), getState(mask, 5, 8));
+  }
+
+  private String getState(long mask, int face, int facePosition) {
+    return (mask >> encodePosition(face, facePosition) & 1) == 0
+      ? " X " : state[face][facePosition].toString();
   }
 
   private static final int encodePosition(int face, int facePosition) {
