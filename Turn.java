@@ -43,7 +43,16 @@ public enum Turn {
   b_PRIME("b'", F, F, F, z),
   d("d", U, y, y, y),
   d2("d2", U, U, y, y),
-  d_PRIME("d'", U, U, U, y);
+  d_PRIME("d'", U, U, U, y),
+  M("M", x, x, x, L, L, L, R),
+  M2("M2", L, L, R, R, x, x),
+  M_PRIME("M'", x, L, R, R, R),
+  E("E", y, y, y, U, D, D, D),
+  E2("E2", y, y, U, U, D, D),
+  E_PRIME("E'", y, U, U, U, D),
+  S("S", z, F, F, F, B),
+  S2("S2", z, z, F, F, B, B),
+  S_PRIME("S'", z, z, z, F, B, B, B);
 
   final String notation;
   final Turn[] basicTurns;
