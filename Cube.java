@@ -1,3 +1,6 @@
+import static java.util.stream.Collectors.toList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Stream;
 
 class Cube {
@@ -26,7 +29,11 @@ class Cube {
           .allMatch(color -> color == face[0]));
   }
 
-  public void apply(Turn... turns) {
+  public void apply(Algorithm alg) {
+    apply(alg.turns);
+  }
+
+  public void apply(List<Turn> turns) {
     for (Turn turn : turns) {
       for (Turn basicTurn : turn.basicTurns) {
         applySimple(basicTurn);
@@ -34,10 +41,12 @@ class Cube {
     }
   }
 
-  public void undo(Turn... turns) {
-    for (int i = turns.length - 1; i >= 0; i--) {
-      this.apply(turns[i].reverse());
-    }
+  public void undo(List<Turn> turns) {
+    Collections.reverse(turns);
+
+    apply(turns.stream()
+        .map(Turn::reverse)
+        .collect(toList()));
   }
 
   public void applySimple(Turn t) {

@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class SetupMoves {
-  static final HashMap<String, Turn[]> EDGE_SETUPS;
-  static final HashMap<String, Turn[]> CORNER_SETUPS;
-  private static final Turn[] EMPTY = {};
+  static final HashMap<String, List<Turn>> EDGE_SETUPS;
+  static final HashMap<String, List<Turn>> CORNER_SETUPS;
+  private static final List<Turn> EMPTY = new ArrayList<>();
 
   static {
     EDGE_SETUPS = new HashMap<>();

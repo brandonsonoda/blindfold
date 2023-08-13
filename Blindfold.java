@@ -31,18 +31,18 @@ public class Blindfold {
     for (char edgeChar : edgeMemo.toCharArray()) {
       String edge = "" + edgeChar;
       c.apply(SetupMoves.EDGE_SETUPS.get(edge));
-      c.apply(Algorithms.T_PERM);
+      c.apply(Algorithm.T_PERM);
       c.undo(SetupMoves.EDGE_SETUPS.get(edge));
     }
 
     if (parity) {
-      c.apply(Algorithms.PARITY_ALGORITHM);
+      c.apply(Algorithm.PARITY_ALGORITHM);
     }
 
     for (char cornerChar : cornerMemo.toCharArray()) {
       String corner = "" + cornerChar;
       c.apply(SetupMoves.CORNER_SETUPS.get(corner));
-      c.apply(Algorithms.CORNER_SWAP);
+      c.apply(Algorithm.CORNER_SWAP);
       c.undo(SetupMoves.CORNER_SETUPS.get(corner));
     }
   }
