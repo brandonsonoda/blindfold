@@ -42,11 +42,13 @@ class Cube {
   }
 
   public void undo(List<Turn> turns) {
-    Collections.reverse(turns);
+    List<Turn> reversedTurns =
+      turns.stream()
+      .map(Turn::reverse)
+      .collect(toList());
+    Collections.reverse(reversedTurns);
 
-    apply(turns.stream()
-        .map(Turn::reverse)
-        .collect(toList()));
+    apply(reversedTurns);
   }
 
   public void applySimple(Turn t) {
