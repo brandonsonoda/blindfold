@@ -1,7 +1,7 @@
 import static java.util.stream.Collectors.toList;
 import java.util.Collections;
+
 import java.util.List;
-import java.util.stream.Stream;
 
 interface Cube {
   /** Resets cube to solved state. */
@@ -9,9 +9,6 @@ interface Cube {
 
   /** Returns true if this cube is solved, false otherwise. */
   public boolean isCubeSolved();
-
-  /** Undos application of a sequence of turns to this cube. */
-  public void undo(List<Turn> turns);
 
   /** Applies a single turn to this cube. */
   public void apply(Turn t);
@@ -32,4 +29,16 @@ interface Cube {
       }
     }
   }
+
+  /** Undos application of a sequence of turns to this cube. */
+  public default void undo(List<Turn> turns) {
+    List<Turn> reversedTurns =
+      turns.stream()
+      .map(Turn::reverse)
+      .collect(toList());
+    Collections.reverse(reversedTurns);
+
+    apply(reversedTurns);
+  }
+
 }

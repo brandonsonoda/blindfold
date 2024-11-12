@@ -1,5 +1,3 @@
-import static java.util.stream.Collectors.toList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -29,17 +27,6 @@ class CubeImpl implements Cube {
     return Stream.of(state)
       .allMatch(face -> Stream.of(face)
           .allMatch(color -> color == face[0]));
-  }
-
-  @Override
-  public void undo(List<Turn> turns) {
-    List<Turn> reversedTurns =
-      turns.stream()
-      .map(Turn::reverse)
-      .collect(toList());
-    Collections.reverse(reversedTurns);
-
-    apply(reversedTurns);
   }
 
   @Override
@@ -202,7 +189,7 @@ class CubeImpl implements Cube {
       String.format(SINGLE_FACE, getState(mask, 2, 3), getState(mask, 2, 4), getState(mask, 2, 5)) +
       String.format(SINGLE_FACE, getState(mask, 3, 3), getState(mask, 3, 4), getState(mask, 3, 5)) +
       String.format(SINGLE_FACE, getState(mask, 4, 3), getState(mask, 4, 4), getState(mask, 4, 5)) + "\n" + 
-      //  Middle Band 2
+      //  Middle Band 3
       String.format(SINGLE_FACE, getState(mask, 1, 6), getState(mask, 1, 7), getState(mask, 1, 8)) +
       String.format(SINGLE_FACE, getState(mask, 2, 6), getState(mask, 2, 7), getState(mask, 2, 8)) +
       String.format(SINGLE_FACE, getState(mask, 3, 6), getState(mask, 3, 7), getState(mask, 3, 8)) +
