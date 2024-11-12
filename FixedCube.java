@@ -2,11 +2,11 @@ import java.util.List;
 import java.util.Arrays;
 
 /**
- * Cube implementation that tracks stickered pieces using the Speffz scheme.
+ * Cube implementation that tracks stickered pieces using the Speffz scheme, with fixed white on top and gree in front.
  *
  * See https://www.speedsolving.com/wiki/index.php?title=Speffz
  */
-class StickeredCube implements Cube {
+class FixedCube implements Cube {
   // Tracking of the minimal number of edge stickers
   // {A, B, C, D, F, J, N, R, U, V, W, X}
   private final EdgeSticker[] edges = new EdgeSticker[12];
@@ -14,7 +14,7 @@ class StickeredCube implements Cube {
   // {A, B, C, D, U, V, W, X}
   private final CornerSticker[] corners = new CornerSticker[8];
 
-  public StickeredCube() {
+  public FixedCube() {
     this.setCubeToSolved();
   }
 
@@ -126,7 +126,7 @@ class StickeredCube implements Cube {
       case x:
       case y:
       case z:
-        throw new IllegalArgumentException("StickeredCube does not support turn: " + t);
+        throw new UnsupportedOperationException("FixedCube does not support turn: " + t);
       default:
         throw new IllegalArgumentException("Not a basic turn: " + t);
     }

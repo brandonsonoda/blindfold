@@ -4,7 +4,7 @@ public class Main {
   private static final String BLIND_PREFIX = "blind: ";
 
   public static void main(String[] args) {
-    Cube c = new CubeImpl();
+    Cube c = new RotatableCube();
     Scanner scanner = new Scanner(System.in);
     while (sneakyPrint() && scanner.hasNextLine()) {
       String line = scanner.nextLine();
@@ -42,6 +42,8 @@ public class Main {
         c.apply(Algorithms.compile(line));
       } catch (IllegalArgumentException e) {
         System.out.println("invalid notation");
+      } catch (Exception e) {
+        e.printStackTrace();
       }
     }
     System.out.println();
