@@ -68,51 +68,51 @@ class StickeredCube implements Cube {
         return;
       case R:
         updateCorners(
-            new CornerUpdate(1, rotateCw(corners[2])),
-            new CornerUpdate(6, rotateCcw(corners[1])),
-            new CornerUpdate(5, rotateCw(corners[6])),
-            new CornerUpdate(2, rotateCcw(corners[5])));
+            new CornerUpdate(1, CornerStickers.rotateCw(corners[2])),
+            new CornerUpdate(6, CornerStickers.rotateCcw(corners[1])),
+            new CornerUpdate(5, CornerStickers.rotateCw(corners[6])),
+            new CornerUpdate(2, CornerStickers.rotateCcw(corners[5])));
         updateEdges(
             new EdgeUpdate(1, edges[5]),
-            new EdgeUpdate(6, flip(edges[1])),
-            new EdgeUpdate(9, flip(edges[6])),
+            new EdgeUpdate(6, EdgeStickers.flip(edges[1])),
+            new EdgeUpdate(9, EdgeStickers.flip(edges[6])),
             new EdgeUpdate(5, edges[9]));
         return;
       case F:
         updateCorners(
-            new CornerUpdate(3, rotateCcw(corners[4])),
-            new CornerUpdate(2, rotateCw(corners[3])),
-            new CornerUpdate(5, rotateCcw(corners[2])),
-            new CornerUpdate(4, rotateCw(corners[5])));
+            new CornerUpdate(3, CornerStickers.rotateCcw(corners[4])),
+            new CornerUpdate(2, CornerStickers.rotateCw(corners[3])),
+            new CornerUpdate(5, CornerStickers.rotateCcw(corners[2])),
+            new CornerUpdate(4, CornerStickers.rotateCw(corners[5])));
         updateEdges(
             new EdgeUpdate(2, edges[4]),
             new EdgeUpdate(4, edges[8]),
-            new EdgeUpdate(8, flip(edges[5])),
-            new EdgeUpdate(5, flip(edges[2])));
+            new EdgeUpdate(8, EdgeStickers.flip(edges[5])),
+            new EdgeUpdate(5, EdgeStickers.flip(edges[2])));
         return;
       case L:
         updateCorners(
-            new CornerUpdate(0, rotateCcw(corners[7])),
-            new CornerUpdate(7, rotateCw(corners[4])),
-            new CornerUpdate(4, rotateCcw(corners[3])),
-            new CornerUpdate(3, rotateCw(corners[0])));
+            new CornerUpdate(0, CornerStickers.rotateCcw(corners[7])),
+            new CornerUpdate(7, CornerStickers.rotateCw(corners[4])),
+            new CornerUpdate(4, CornerStickers.rotateCcw(corners[3])),
+            new CornerUpdate(3, CornerStickers.rotateCw(corners[0])));
         updateEdges(
             new EdgeUpdate(3, edges[7]),
             new EdgeUpdate(7, edges[11]),
-            new EdgeUpdate(11, flip(edges[4])),
-            new EdgeUpdate(4, flip(edges[3])));
+            new EdgeUpdate(11, EdgeStickers.flip(edges[4])),
+            new EdgeUpdate(4, EdgeStickers.flip(edges[3])));
         return;
       case B:
         updateCorners(
-            new CornerUpdate(0, rotateCw(corners[1])),
-            new CornerUpdate(1, rotateCcw(corners[6])),
-            new CornerUpdate(6, rotateCw(corners[7])),
-            new CornerUpdate(7, rotateCcw(corners[0])));
+            new CornerUpdate(0, CornerStickers.rotateCw(corners[1])),
+            new CornerUpdate(1, CornerStickers.rotateCcw(corners[6])),
+            new CornerUpdate(6, CornerStickers.rotateCw(corners[7])),
+            new CornerUpdate(7, CornerStickers.rotateCcw(corners[0])));
         updateEdges(
             new EdgeUpdate(0, edges[6]),
             new EdgeUpdate(6, edges[10]),
-            new EdgeUpdate(10, flip(edges[7])),
-            new EdgeUpdate(7, flip(edges[0])));
+            new EdgeUpdate(10, EdgeStickers.flip(edges[7])),
+            new EdgeUpdate(7, EdgeStickers.flip(edges[0])));
         return;
       case D:
         updateCorners(
@@ -129,6 +129,7 @@ class StickeredCube implements Cube {
       case x:
       case y:
       case z:
+        throw new IllegalArgumentException("StickeredCube does not support turn: " + t);
       default:
         throw new IllegalArgumentException("Not a basic turn: " + t);
     }
@@ -202,7 +203,7 @@ class StickeredCube implements Cube {
         return edges[11];
     }
 
-    return flip(getEdgeSticker(flip(homeSticker)));
+    return EdgeStickers.flip(getEdgeSticker(EdgeStickers.flip(homeSticker)));
   }
 
   private CornerSticker getCornerSticker(CornerSticker homeSticker) {
@@ -225,191 +226,7 @@ class StickeredCube implements Cube {
         return corners[7];
     }
 
-    return rotateCcw(getCornerSticker(rotateCw(homeSticker)));
-  }
-
-  private enum EdgeSticker {
-    A_EDGE('A', Color.WHITE),
-    B_EDGE('B', Color.WHITE),
-    C_EDGE('C', Color.WHITE),
-    D_EDGE('D', Color.WHITE),
-    E_EDGE('E', Color.ORANGE),
-    F_EDGE('F', Color.ORANGE),
-    G_EDGE('G', Color.ORANGE),
-    H_EDGE('H', Color.ORANGE),
-    I_EDGE('I', Color.GREEN),
-    J_EDGE('J', Color.GREEN),
-    K_EDGE('K', Color.GREEN),
-    L_EDGE('L', Color.GREEN),
-    M_EDGE('M', Color.RED),
-    N_EDGE('N', Color.RED),
-    O_EDGE('O', Color.RED),
-    P_EDGE('P', Color.RED),
-    Q_EDGE('Q', Color.BLUE),
-    R_EDGE('R', Color.BLUE),
-    S_EDGE('S', Color.BLUE),
-    T_EDGE('T', Color.BLUE),
-    U_EDGE('U', Color.YELLOW),
-    V_EDGE('V', Color.YELLOW),
-    W_EDGE('W', Color.YELLOW),
-    X_EDGE('X', Color.YELLOW);
-
-    final char serializedCharacter;
-    final Color color;
-
-    EdgeSticker(char serializedCharacter, Color color) {
-      this.serializedCharacter = serializedCharacter;
-      this.color = color;
-    }
-  }
-
-  private enum CornerSticker {
-    A_CORNER('a', Color.WHITE),
-    B_CORNER('b', Color.WHITE),
-    C_CORNER('c', Color.WHITE),
-    D_CORNER('d', Color.WHITE),
-    E_CORNER('e', Color.ORANGE),
-    F_CORNER('f', Color.ORANGE),
-    G_CORNER('g', Color.ORANGE),
-    H_CORNER('h', Color.ORANGE),
-    I_CORNER('i', Color.GREEN),
-    J_CORNER('j', Color.GREEN),
-    K_CORNER('k', Color.GREEN),
-    L_CORNER('l', Color.GREEN),
-    M_CORNER('m', Color.RED),
-    N_CORNER('n', Color.RED),
-    O_CORNER('o', Color.RED),
-    P_CORNER('p', Color.RED),
-    Q_CORNER('q', Color.BLUE),
-    R_CORNER('r', Color.BLUE),
-    S_CORNER('s', Color.BLUE),
-    T_CORNER('t', Color.BLUE),
-    U_CORNER('u', Color.YELLOW),
-    V_CORNER('v', Color.YELLOW),
-    W_CORNER('w', Color.YELLOW),
-    X_CORNER('x', Color.YELLOW);
-
-    final char serializedCharacter;
-    final Color color;
-
-    CornerSticker(char serializedCharacter, Color color) {
-      this.serializedCharacter = serializedCharacter;
-      this.color = color;
-    }
-  }
-
-  private static EdgeSticker flip(EdgeSticker original) {
-    switch (original) {
-      case A_EDGE:
-        return EdgeSticker.Q_EDGE;
-      case B_EDGE:
-        return EdgeSticker.M_EDGE;
-      case C_EDGE:
-        return EdgeSticker.I_EDGE;
-      case D_EDGE:
-        return EdgeSticker.E_EDGE;
-      case E_EDGE:
-        return EdgeSticker.D_EDGE;
-      case F_EDGE:
-        return EdgeSticker.L_EDGE;
-      case G_EDGE:
-        return EdgeSticker.X_EDGE;
-      case H_EDGE:
-        return EdgeSticker.R_EDGE;
-      case I_EDGE:
-        return EdgeSticker.C_EDGE;
-      case J_EDGE:
-        return EdgeSticker.P_EDGE;
-      case K_EDGE:
-        return EdgeSticker.U_EDGE;
-      case L_EDGE:
-        return EdgeSticker.F_EDGE;
-      case M_EDGE:
-        return EdgeSticker.B_EDGE;
-      case N_EDGE:
-        return EdgeSticker.T_EDGE;
-      case O_EDGE:
-        return EdgeSticker.V_EDGE;
-      case P_EDGE:
-        return EdgeSticker.J_EDGE;
-      case Q_EDGE:
-        return EdgeSticker.A_EDGE;
-      case R_EDGE:
-        return EdgeSticker.H_EDGE;
-      case S_EDGE:
-        return EdgeSticker.W_EDGE;
-      case T_EDGE:
-        return EdgeSticker.N_EDGE;
-      case U_EDGE:
-        return EdgeSticker.K_EDGE;
-      case V_EDGE:
-        return EdgeSticker.O_EDGE;
-      case W_EDGE:
-        return EdgeSticker.S_EDGE;
-      case X_EDGE:
-        return EdgeSticker.G_EDGE;
-    }
-
-    throw new IllegalStateException("enumerated all edges");
-  }
-
-  private static CornerSticker rotateCw(CornerSticker original) {
-    switch (original) {
-      case A_CORNER:
-        return CornerSticker.R_CORNER;
-      case B_CORNER:
-        return CornerSticker.N_CORNER;
-      case C_CORNER:
-        return CornerSticker.J_CORNER;
-      case D_CORNER:
-        return CornerSticker.F_CORNER;
-      case E_CORNER:
-        return CornerSticker.A_CORNER;
-      case F_CORNER:
-        return CornerSticker.I_CORNER;
-      case G_CORNER:
-        return CornerSticker.U_CORNER;
-      case H_CORNER:
-        return CornerSticker.S_CORNER;
-      case I_CORNER:
-        return CornerSticker.D_CORNER;
-      case J_CORNER:
-        return CornerSticker.M_CORNER;
-      case K_CORNER:
-        return CornerSticker.V_CORNER;
-      case L_CORNER:
-        return CornerSticker.G_CORNER;
-      case M_CORNER:
-        return CornerSticker.C_CORNER;
-      case N_CORNER:
-        return CornerSticker.Q_CORNER;
-      case O_CORNER:
-        return CornerSticker.W_CORNER;
-      case P_CORNER:
-        return CornerSticker.K_CORNER;
-      case Q_CORNER:
-        return CornerSticker.B_CORNER;
-      case R_CORNER:
-        return CornerSticker.E_CORNER;
-      case S_CORNER:
-        return CornerSticker.X_CORNER;
-      case T_CORNER:
-        return CornerSticker.O_CORNER;
-      case U_CORNER:
-        return CornerSticker.L_CORNER;
-      case V_CORNER:
-        return CornerSticker.P_CORNER;
-      case W_CORNER:
-        return CornerSticker.T_CORNER;
-      case X_CORNER:
-        return CornerSticker.H_CORNER;
-    }
-
-    throw new IllegalStateException("enumerated all corners");
-  }
-
-  private static CornerSticker rotateCcw(CornerSticker original) {
-    return rotateCw(rotateCw(original));
+    return CornerStickers.rotateCcw(getCornerSticker(CornerStickers.rotateCw(homeSticker)));
   }
 
   private String getRow(CornerSticker firstCorner, EdgeSticker edgeSticker, CornerSticker secondCorner) {
