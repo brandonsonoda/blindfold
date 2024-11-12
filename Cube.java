@@ -13,13 +13,19 @@ interface Cube {
   /** Applies a single turn to this cube. */
   public void apply(Turn t);
 
-  /** Prints the current state of this cube. */
-  public String printCube(long mask);
-
   /** Apply an algorithm to this cube. */
   public default void apply(Algorithm alg) {
     apply(alg.turns);
   }
+
+  /** Return the color of the sticker in this location. */
+  public Color getStickerColor(EdgeSticker homeSticker);
+
+  /** Return the color of the sticker in this location. */
+  public Color getStickerColor(CornerSticker homeSticker);
+
+  /** Return the color of the sticker in this location. */
+  public Color getStickerColor(Face homeSticker);
 
   /** Apply a sequence of turns to this cube. */
   public default void apply(List<Turn> turns) {

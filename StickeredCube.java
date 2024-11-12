@@ -7,9 +7,6 @@ import java.util.Arrays;
  * See https://www.speedsolving.com/wiki/index.php?title=Speffz
  */
 class StickeredCube implements Cube {
-  private static final String EMPTY_SLOT = "         ";
-  private static final String SINGLE_FACE =  "%s%s%s";
-
   // Tracking of the minimal number of edge stickers
   // {A, B, C, D, F, J, N, R, U, V, W, X}
   private final EdgeSticker[] edges = new EdgeSticker[12];
@@ -137,35 +134,7 @@ class StickeredCube implements Cube {
 
   @Override
   public String toString() {
-    return printCube(-1);
-  }
-
-  @Override
-  public String printCube(long mask) {
-    return
-      // TOP FACE
-      EMPTY_SLOT + getRow(CornerSticker.A_CORNER, EdgeSticker.A_EDGE, CornerSticker.B_CORNER) + "\n" +
-      EMPTY_SLOT + getRow(EdgeSticker.D_EDGE, Color.WHITE, EdgeSticker.B_EDGE) + "\n" + 
-      EMPTY_SLOT + getRow(CornerSticker.D_CORNER, EdgeSticker.C_EDGE, CornerSticker.C_CORNER) + "\n" +
-      //  Middle Band 1
-      getRow(CornerSticker.E_CORNER, EdgeSticker.E_EDGE, CornerSticker.F_CORNER) +
-      getRow(CornerSticker.I_CORNER, EdgeSticker.I_EDGE, CornerSticker.J_CORNER) +
-      getRow(CornerSticker.M_CORNER, EdgeSticker.M_EDGE, CornerSticker.N_CORNER) +
-      getRow(CornerSticker.Q_CORNER, EdgeSticker.Q_EDGE, CornerSticker.R_CORNER) + "\n" +
-      //  Middle Band 2
-      getRow(EdgeSticker.H_EDGE, Color.ORANGE, EdgeSticker.F_EDGE) + 
-      getRow(EdgeSticker.L_EDGE, Color.GREEN, EdgeSticker.J_EDGE) + 
-      getRow(EdgeSticker.P_EDGE, Color.RED, EdgeSticker.N_EDGE) + 
-      getRow(EdgeSticker.T_EDGE, Color.BLUE, EdgeSticker.R_EDGE) + "\n" + 
-      //  Middle Band 3
-      getRow(CornerSticker.H_CORNER, EdgeSticker.G_EDGE, CornerSticker.G_CORNER) +
-      getRow(CornerSticker.L_CORNER, EdgeSticker.K_EDGE, CornerSticker.K_CORNER) +
-      getRow(CornerSticker.P_CORNER, EdgeSticker.O_EDGE, CornerSticker.O_CORNER) +
-      getRow(CornerSticker.T_CORNER, EdgeSticker.S_EDGE, CornerSticker.S_CORNER) + "\n" +
-      // BOTTOM FACE
-      EMPTY_SLOT + getRow(CornerSticker.U_CORNER, EdgeSticker.U_EDGE, CornerSticker.V_CORNER) + "\n" +
-      EMPTY_SLOT + getRow(EdgeSticker.X_EDGE, Color.YELLOW, EdgeSticker.V_EDGE) + "\n" + 
-      EMPTY_SLOT + getRow(CornerSticker.X_CORNER, EdgeSticker.W_EDGE, CornerSticker.W_CORNER);
+    return CubePrinter.stringify(this);
   }
 
   public String serialize() {
@@ -175,7 +144,7 @@ class StickeredCube implements Cube {
     return serializedCube.toString();
   }
 
-  private EdgeSticker getEdgeSticker(EdgeSticker homeSticker) {
+  private EdgeSticker getSticker(EdgeSticker homeSticker) {
     switch (homeSticker) {
       case A_EDGE:
         return edges[0];
@@ -203,10 +172,15 @@ class StickeredCube implements Cube {
         return edges[11];
     }
 
-    return EdgeStickers.flip(getEdgeSticker(EdgeStickers.flip(homeSticker)));
+    return EdgeStickers.flip(getSticker(EdgeStickers.flip(homeSticker)));
   }
 
-  private CornerSticker getCornerSticker(CornerSticker homeSticker) {
+  @Override
+  public Color getStickerColor(EdgeSticker homeSticker) {
+    return getSticker(homeSticker).color;
+  }
+
+  private CornerSticker getSticker(CornerSticker homeSticker) {
     switch (homeSticker) {
       case A_CORNER:
         return corners[0];
@@ -226,19 +200,32 @@ class StickeredCube implements Cube {
         return corners[7];
     }
 
-    return CornerStickers.rotateCcw(getCornerSticker(CornerStickers.rotateCw(homeSticker)));
+    return CornerStickers.rotateCcw(getSticker(CornerStickers.rotateCw(homeSticker)));
   }
 
-  private String getRow(CornerSticker firstCorner, EdgeSticker edgeSticker, CornerSticker secondCorner) {
-    return String.format(SINGLE_FACE, getCornerSticker(firstCorner).color.toString(),
-        getEdgeSticker(edgeSticker).color.toString(),
-        getCornerSticker(secondCorner).color.toString());
+  @Override
+  public Color getStickerColor(CornerSticker homeSticker) {
+    return getSticker(homeSticker).color;
   }
 
-  private String getRow(EdgeSticker firstEdge, Color center, EdgeSticker secondEdge) {
-    return String.format(SINGLE_FACE, getEdgeSticker(firstEdge).color.toString(),
-        center.toString(),
-        getEdgeSticker(secondEdge).color.toString());
+  @Override
+  public Color getStickerColor(Face homeSticker) {
+    switch (homeSticker) {
+      case UP:
+        return Color.WHITE;
+      case DOWN:
+        return Color.YELLOW;
+      case LEFT:
+        return Color.ORANGE;
+      case RIGHT:
+        return Color.RED;
+      case FRONT:
+        return Color.GREEN;
+      case BACK:
+        return Color.BLUE;
+    }
+
+    throw new IllegalArgumentException("Unexpected Color: " + homeSticker);
   }
 
   private void updateEdges(EdgeUpdate... edgeUpdates) {

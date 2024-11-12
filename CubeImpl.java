@@ -2,8 +2,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 class CubeImpl implements Cube {
-  private static final String EMPTY_SLOT = "         ";
-  private static final String SINGLE_FACE =  "%s%s%s";
   private Color[][] state = new Color[6][9]; //nice
 
   public CubeImpl() {
@@ -27,6 +25,138 @@ class CubeImpl implements Cube {
     return Stream.of(state)
       .allMatch(face -> Stream.of(face)
           .allMatch(color -> color == face[0]));
+  }
+
+  @Override
+  public Color getStickerColor(CornerSticker homeSticker) {
+    switch (homeSticker) {
+      case A_CORNER:
+        return state[0][0];
+      case B_CORNER:
+        return state[0][2];
+      case C_CORNER:
+        return state[0][8];
+      case D_CORNER:
+        return state[0][6];
+      case E_CORNER:
+        return state[1][0];
+      case F_CORNER:
+        return state[1][2];
+      case G_CORNER:
+        return state[1][8];
+      case H_CORNER:
+        return state[1][6];
+      case I_CORNER:
+        return state[2][0];
+      case J_CORNER:
+        return state[2][2];
+      case K_CORNER:
+        return state[2][8];
+      case L_CORNER:
+        return state[2][6];
+      case M_CORNER:
+        return state[3][0];
+      case N_CORNER:
+        return state[3][2];
+      case O_CORNER:
+        return state[3][8];
+      case P_CORNER:
+        return state[3][6];
+      case Q_CORNER:
+        return state[4][0];
+      case R_CORNER:
+        return state[4][2];
+      case S_CORNER:
+        return state[4][8];
+      case T_CORNER:
+        return state[4][6];
+      case U_CORNER:
+        return state[5][0];
+      case V_CORNER:
+        return state[5][2];
+      case W_CORNER:
+        return state[5][8];
+      case X_CORNER:
+        return state[5][6];
+    }
+
+    throw new IllegalStateException("enumerated all corners");
+  }
+
+  @Override
+  public Color getStickerColor(EdgeSticker homeSticker) {
+    switch (homeSticker) {
+      case A_EDGE:
+        return state[0][1];
+      case B_EDGE:
+        return state[0][5];
+      case C_EDGE:
+        return state[0][7];
+      case D_EDGE:
+        return state[0][3];
+      case E_EDGE:
+        return state[1][1];
+      case F_EDGE:
+        return state[1][5];
+      case G_EDGE:
+        return state[1][7];
+      case H_EDGE:
+        return state[1][3];
+      case I_EDGE:
+        return state[2][1];
+      case J_EDGE:
+        return state[2][5];
+      case K_EDGE:
+        return state[2][7];
+      case L_EDGE:
+        return state[2][3];
+      case M_EDGE:
+        return state[3][1];
+      case N_EDGE:
+        return state[3][5];
+      case O_EDGE:
+        return state[3][7];
+      case P_EDGE:
+        return state[3][3];
+      case Q_EDGE:
+        return state[4][1];
+      case R_EDGE:
+        return state[4][5];
+      case S_EDGE:
+        return state[4][7];
+      case T_EDGE:
+        return state[4][3];
+      case U_EDGE:
+        return state[5][1];
+      case V_EDGE:
+        return state[5][5];
+      case W_EDGE:
+        return state[5][7];
+      case X_EDGE:
+        return state[5][3];
+    }
+
+    throw new IllegalStateException("enumerated all edges");
+  }
+
+  @Override
+  public Color getStickerColor(Face homeSticker) {
+    switch (homeSticker) {
+      case UP:
+        return state[0][4];
+      case DOWN:
+        return state[5][4];
+      case LEFT:
+        return state[1][4];
+      case RIGHT:
+        return state[3][4];
+      case FRONT:
+        return state[2][4];
+      case BACK:
+        return state[4][4];
+    }
+
+    throw new IllegalArgumentException("Unexpected Color: " + homeSticker);
   }
 
   @Override
@@ -169,35 +299,7 @@ class CubeImpl implements Cube {
   public String toString() {
     // 2-side PLL String
     // return printCube(0b000000111000000111000000000000000000111111111L);
-    return printCube(-1);
-  }
-
-  @Override
-  public String printCube(long mask) {
-    return
-      // TOP FACE
-      EMPTY_SLOT + String.format(SINGLE_FACE, getState(mask, 0, 0), getState(mask, 0, 1), getState(mask, 0, 2)) + "\n" +
-      EMPTY_SLOT + String.format(SINGLE_FACE, getState(mask, 0, 3), getState(mask, 0, 4), getState(mask, 0, 5)) + "\n" + 
-      EMPTY_SLOT + String.format(SINGLE_FACE, getState(mask, 0, 6), getState(mask, 0, 7), getState(mask, 0, 8)) + "\n" +
-      //  Middle Band 1
-      String.format(SINGLE_FACE, getState(mask, 1, 0), getState(mask, 1, 1), getState(mask, 1, 2)) +
-      String.format(SINGLE_FACE, getState(mask, 2, 0), getState(mask, 2, 1), getState(mask, 2, 2)) +
-      String.format(SINGLE_FACE, getState(mask, 3, 0), getState(mask, 3, 1), getState(mask, 3, 2)) + 
-      String.format(SINGLE_FACE, getState(mask, 4, 0), getState(mask, 4, 1), getState(mask, 4, 2)) +  "\n" +
-      //  Middle Band 2
-      String.format(SINGLE_FACE, getState(mask, 1, 3), getState(mask, 1, 4), getState(mask, 1, 5)) +
-      String.format(SINGLE_FACE, getState(mask, 2, 3), getState(mask, 2, 4), getState(mask, 2, 5)) +
-      String.format(SINGLE_FACE, getState(mask, 3, 3), getState(mask, 3, 4), getState(mask, 3, 5)) +
-      String.format(SINGLE_FACE, getState(mask, 4, 3), getState(mask, 4, 4), getState(mask, 4, 5)) + "\n" + 
-      //  Middle Band 3
-      String.format(SINGLE_FACE, getState(mask, 1, 6), getState(mask, 1, 7), getState(mask, 1, 8)) +
-      String.format(SINGLE_FACE, getState(mask, 2, 6), getState(mask, 2, 7), getState(mask, 2, 8)) +
-      String.format(SINGLE_FACE, getState(mask, 3, 6), getState(mask, 3, 7), getState(mask, 3, 8)) +
-      String.format(SINGLE_FACE, getState(mask, 4, 6), getState(mask, 4, 7), getState(mask, 4, 8)) +  "\n" +
-      // BOTTOM FACE
-      EMPTY_SLOT + String.format(SINGLE_FACE, getState(mask, 5, 0), getState(mask, 5, 1), getState(mask, 5, 2)) + "\n" +
-      EMPTY_SLOT + String.format(SINGLE_FACE, getState(mask, 5, 3), getState(mask, 5, 4), getState(mask, 5, 5)) + "\n" + 
-      EMPTY_SLOT + String.format(SINGLE_FACE, getState(mask, 5, 6), getState(mask, 5, 7), getState(mask, 5, 8));
+    return CubePrinter.stringify(this);
   }
 
   private String getState(long mask, int face, int facePosition) {
