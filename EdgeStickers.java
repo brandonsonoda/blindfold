@@ -53,4 +53,86 @@ final class EdgeStickers {
 
     throw new IllegalStateException("enumerated all edges");
   }
+
+  /**
+    * Returns the EdgeSticker that has the given stickerColor and the sticker on the flip side has oppositeColor.
+    */
+  static EdgeSticker identifyEdge(Color stickerColor, Color oppositeColor) {
+    switch (stickerColor) {
+      case WHITE:
+        switch (oppositeColor) {
+          case ORANGE:
+            return EdgeSticker.D_EDGE;
+          case GREEN:
+            return EdgeSticker.C_EDGE;
+          case RED:
+            return EdgeSticker.B_EDGE;
+          case BLUE:
+            return EdgeSticker.A_EDGE;
+        }
+        break;
+      case ORANGE:
+        switch (oppositeColor) {
+          case WHITE:
+            return EdgeSticker.E_EDGE;
+          case GREEN:
+            return EdgeSticker.F_EDGE;
+          case BLUE:
+            return EdgeSticker.H_EDGE;
+          case YELLOW:
+            return EdgeSticker.G_EDGE;
+        }
+        break;
+      case GREEN:
+        switch (oppositeColor) {
+          case WHITE:
+            return EdgeSticker.I_EDGE;
+          case ORANGE:
+            return EdgeSticker.L_EDGE;
+          case RED:
+            return EdgeSticker.J_EDGE;
+          case YELLOW:
+            return EdgeSticker.K_EDGE;
+        }
+        break;
+      case RED:
+        switch (oppositeColor) {
+          case WHITE:
+            return EdgeSticker.M_EDGE;
+          case GREEN:
+            return EdgeSticker.P_EDGE;
+          case BLUE:
+            return EdgeSticker.N_EDGE;
+          case YELLOW:
+            return EdgeSticker.O_EDGE;
+        }
+        break;
+      case BLUE:
+        switch (oppositeColor) {
+          case WHITE:
+            return EdgeSticker.Q_EDGE;
+          case ORANGE:
+            return EdgeSticker.R_EDGE;
+          case RED:
+            return EdgeSticker.T_EDGE;
+          case YELLOW:
+            return EdgeSticker.S_EDGE;
+        }
+        break;
+      case YELLOW:
+        switch (oppositeColor) {
+          case ORANGE:
+            return EdgeSticker.X_EDGE;
+          case GREEN:
+            return EdgeSticker.U_EDGE;
+          case RED:
+            return EdgeSticker.V_EDGE;
+          case BLUE:
+            return EdgeSticker.W_EDGE;
+        }
+        break;
+    }
+
+    throw new IllegalStateException(String.format("Unexpected edge sticker combination: %s-%s", stickerColor, oppositeColor));
+  }
 }

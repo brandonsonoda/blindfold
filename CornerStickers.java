@@ -110,7 +110,7 @@ final class CornerStickers {
   }
 
   /**
-    * Returns the corner such that corner.color is stickerColor and rotateCcw(corner).color is ccwStickerColor
+    * Returns the CornerSticker such that corner.color is stickerColor and rotateCcw(corner).color is ccwStickerColor
     */
   static CornerSticker identifyCorner(Color stickerColor, Color ccwStickerColor) {
     switch (stickerColor) {
