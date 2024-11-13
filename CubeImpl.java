@@ -80,7 +80,7 @@ class CubeImpl implements Cube {
         return state[5][6];
     }
 
-    throw new IllegalStateException("enumerated all corners");
+    throw new UnsupportedCaseException(homeSticker);
   }
 
   @Override
@@ -136,7 +136,7 @@ class CubeImpl implements Cube {
         return state[5][3];
     }
 
-    throw new IllegalStateException("enumerated all edges");
+    throw new UnsupportedCaseException(homeSticker);
   }
 
   @Override
@@ -156,7 +156,7 @@ class CubeImpl implements Cube {
         return state[4][4];
     }
 
-    throw new IllegalArgumentException("Unexpected Color: " + homeSticker);
+    throw new UnsupportedCaseException(homeSticker);
   }
 
   @Override

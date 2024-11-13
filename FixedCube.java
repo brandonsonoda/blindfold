@@ -213,19 +213,19 @@ class FixedCube implements Cube {
     switch (homeSticker) {
       case UP:
         return Color.WHITE;
-      case DOWN:
-        return Color.YELLOW;
       case LEFT:
         return Color.ORANGE;
-      case RIGHT:
-        return Color.RED;
       case FRONT:
         return Color.GREEN;
+      case RIGHT:
+        return Color.RED;
       case BACK:
         return Color.BLUE;
+      case DOWN:
+        return Color.YELLOW;
     }
 
-    throw new IllegalArgumentException("Unexpected Color: " + homeSticker);
+    throw new UnsupportedCaseException(homeSticker);
   }
 
   private void updateEdges(EdgeUpdate... edgeUpdates) {

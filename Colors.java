@@ -15,6 +15,6 @@ class Colors {
         return Color.WHITE;
     }
 
-    throw new IllegalStateException(String.format("Unexpected color: ", color));
+    throw new UnsupportedCaseException(color);
   }
 }

@@ -51,7 +51,7 @@ final class EdgeStickers {
         return EdgeSticker.G_EDGE;
     }
 
-    throw new IllegalStateException("enumerated all edges");
+    throw new UnsupportedCaseException(original);
   }
 
   /**

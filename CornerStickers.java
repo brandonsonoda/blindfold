@@ -51,7 +51,7 @@ final class CornerStickers {
         return CornerSticker.H_CORNER;
     }
 
-    throw new IllegalStateException("enumerated all corners");
+    throw new UnsupportedCaseException(original);
   }
 
   static CornerSticker rotateCcw(CornerSticker original) {
@@ -106,7 +106,7 @@ final class CornerStickers {
         return CornerSticker.S_CORNER;
     }
 
-    throw new IllegalStateException("enumerated all corners");
+    throw new UnsupportedCaseException(original);
   }
 
   /**
