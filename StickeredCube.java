@@ -1,10 +1,13 @@
 import java.util.List;
 import java.util.stream.Stream;
 
-class CubeImpl implements Cube {
+/**
+  * A Cube with a data representation of each individual sticker.
+  */
+class StickeredCube implements Cube {
   private Color[][] state = new Color[6][9]; //nice
 
-  public CubeImpl() {
+  public StickeredCube() {
     setCubeToSolved();
   }
 

@@ -1,14 +1,14 @@
 /**
- * Wrapper class around FixedCube that supports rotational moves.
+ * Wrapper class around FixedRotationPieceCube that supports rotational moves.
  */
-class RotatableCube implements Cube {
-  private final FixedCube delegateCube;
+class VariableRotationPieceCube implements Cube {
+  private final FixedRotationPieceCube delegateCube;
 
   private Color upColor;
   private Color frontColor;
 
-  RotatableCube() {
-    this.delegateCube = new FixedCube();
+  VariableRotationPieceCube() {
+    this.delegateCube = new FixedRotationPieceCube();
     this.setCubeToSolved();
   }
 

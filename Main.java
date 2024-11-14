@@ -4,7 +4,7 @@ public class Main {
   private static final String BLIND_PREFIX = "blind: ";
 
   public static void main(String[] args) {
-    Cube c = new RotatableCube();
+    Cube c = new VariableRotationPieceCube();
     Scanner scanner = new Scanner(System.in);
     while (sneakyPrint() && scanner.hasNextLine()) {
       String line = scanner.nextLine();

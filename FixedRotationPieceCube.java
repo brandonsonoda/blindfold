@@ -6,7 +6,7 @@ import java.util.Arrays;
  *
  * See https://www.speedsolving.com/wiki/index.php?title=Speffz
  */
-class FixedCube implements Cube {
+class FixedRotationPieceCube implements Cube {
   // Tracking of the minimal number of edge stickers
   // {A, B, C, D, F, J, N, R, U, V, W, X}
   private final EdgeSticker[] edges = new EdgeSticker[12];
@@ -14,7 +14,7 @@ class FixedCube implements Cube {
   // {A, B, C, D, U, V, W, X}
   private final CornerSticker[] corners = new CornerSticker[8];
 
-  public FixedCube() {
+  public FixedRotationPieceCube() {
     this.setCubeToSolved();
   }
 
@@ -126,7 +126,7 @@ class FixedCube implements Cube {
       case x:
       case y:
       case z:
-        throw new UnsupportedOperationException("FixedCube does not support turn: " + t);
+        throw new UnsupportedOperationException("FixedRotationPieceCube does not support turn: " + t);
       default:
         throw new IllegalArgumentException("Not a basic turn: " + t);
     }
