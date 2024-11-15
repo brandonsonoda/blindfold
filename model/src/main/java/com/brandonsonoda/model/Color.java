@@ -1,6 +1,6 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
 
-  enum Color {
+public enum Color {
    WHITE(0, "\u001B[37m"),
    ORANGE(1, "\u001B[38;2;255;88;0m"),
    GREEN(2, "\u001B[38;2;0;155;72m"),
@@ -13,7 +13,7 @@ package com.brandonsonoda.app;
    final int code;
    final String ansiCode;
 
-   enum PrintMode {
+   public enum PrintMode {
      TEXT, COLOR
    }
 
@@ -31,7 +31,7 @@ package com.brandonsonoda.app;
         : String.format(" %s■%s ", ansiCode, ANSI_RESET);
     }
 
-    static void setPrintMode(PrintMode printMode) {
+    public static void setPrintMode(PrintMode printMode) {
       Color.printMode = printMode;
     }
   }

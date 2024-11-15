@@ -11,4 +11,4 @@ plugins {
 }
 
 rootProject.name = "blindfold"
-include("app", "list", "utilities")
+include("app", "model", "utilities")

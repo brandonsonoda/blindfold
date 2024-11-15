@@ -1,5 +1,6 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
 
+import com.brandonsonoda.utilities.UnsupportedCaseException;
 import java.util.List;
 import java.util.Arrays;
 
@@ -8,7 +9,7 @@ import java.util.Arrays;
  *
  * See https://www.speedsolving.com/wiki/index.php?title=Speffz
  */
-class FixedRotationPieceCube implements Cube {
+public class FixedRotationPieceCube implements Cube {
   // Tracking of the minimal number of edge stickers
   // {A, B, C, D, F, J, N, R, U, V, W, X}
   private final EdgeSticker[] edges = new EdgeSticker[12];

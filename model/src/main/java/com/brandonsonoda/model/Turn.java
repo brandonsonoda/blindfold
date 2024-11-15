@@ -1,4 +1,4 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
 
 public enum Turn {
   U("U"),

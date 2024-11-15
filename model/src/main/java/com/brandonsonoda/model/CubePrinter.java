@@ -1,11 +1,11 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
 
-class CubePrinter {
+public class CubePrinter {
   private static final String EMPTY_SLOT = "         ";
   private static final String SINGLE_FACE =  "%s%s%s";
 
   // TODO: support masks
-  static String stringify(Cube cube) {
+  public static String stringify(Cube cube) {
     return
       // TOP FACE
       EMPTY_SLOT + getRow(cube, CornerSticker.A_CORNER, EdgeSticker.A_EDGE, CornerSticker.B_CORNER) + "\n" +

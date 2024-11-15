@@ -1,7 +1,9 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
 
-final class EdgeStickers {
-  static EdgeSticker flip(EdgeSticker original) {
+import com.brandonsonoda.utilities.UnsupportedCaseException;
+
+public final class EdgeStickers {
+  public static EdgeSticker flip(EdgeSticker original) {
     switch (original) {
       case A_EDGE:
         return EdgeSticker.Q_EDGE;
@@ -59,7 +61,7 @@ final class EdgeStickers {
   /**
     * Returns the EdgeSticker that has the given stickerColor and the sticker on the flip side has oppositeColor.
     */
-  static EdgeSticker identifyEdge(Color stickerColor, Color oppositeColor) {
+  public static EdgeSticker identifyEdge(Color stickerColor, Color oppositeColor) {
     switch (stickerColor) {
       case WHITE:
         switch (oppositeColor) {

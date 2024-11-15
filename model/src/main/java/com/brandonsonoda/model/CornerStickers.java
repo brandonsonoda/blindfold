@@ -1,7 +1,9 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
 
-final class CornerStickers {
-  static CornerSticker rotateCw(CornerSticker original) {
+import com.brandonsonoda.utilities.UnsupportedCaseException;
+
+public final class CornerStickers {
+  public static CornerSticker rotateCw(CornerSticker original) {
     switch (original) {
       case A_CORNER:
         return CornerSticker.R_CORNER;
@@ -56,7 +58,7 @@ final class CornerStickers {
     throw new UnsupportedCaseException(original);
   }
 
-  static CornerSticker rotateCcw(CornerSticker original) {
+  public static CornerSticker rotateCcw(CornerSticker original) {
     switch (original) {
       case A_CORNER:
         return CornerSticker.E_CORNER;
@@ -114,7 +116,7 @@ final class CornerStickers {
   /**
     * Returns the CornerSticker such that corner.color is stickerColor and rotateCcw(corner).color is ccwStickerColor
     */
-  static CornerSticker identifyCorner(Color stickerColor, Color ccwStickerColor) {
+  public static CornerSticker identifyCorner(Color stickerColor, Color ccwStickerColor) {
     switch (stickerColor) {
       case WHITE:
         switch (ccwStickerColor) {

@@ -1,6 +1,8 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
 
-class Colors {
+import com.brandonsonoda.utilities.UnsupportedCaseException;
+
+public class Colors {
   static Color opposite(Color color) {
     switch (color) {
       case WHITE:

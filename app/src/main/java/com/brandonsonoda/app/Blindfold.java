@@ -1,5 +1,8 @@
 package com.brandonsonoda.app;
 
+import com.brandonsonoda.model.Algorithm;
+import com.brandonsonoda.model.Cube;
+
 public class Blindfold {
   public static void apply(Cube c, String memo) {
     String[] split = memo.trim().split("\\s+");

@@ -1,6 +1,6 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
 
-enum EdgeSticker {
+public enum EdgeSticker {
     A_EDGE('A', Color.WHITE),
     B_EDGE('B', Color.WHITE),
     C_EDGE('C', Color.WHITE),

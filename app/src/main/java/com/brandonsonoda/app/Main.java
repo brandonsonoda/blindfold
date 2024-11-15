@@ -1,5 +1,8 @@
 package com.brandonsonoda.app;
 
+import com.brandonsonoda.model.Cube;
+import com.brandonsonoda.model.VariableRotationPieceCube;
+import com.brandonsonoda.model.Color;
 import java.util.Scanner;
 
 public class Main {

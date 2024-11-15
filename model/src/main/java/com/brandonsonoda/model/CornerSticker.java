@@ -1,6 +1,6 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
 
-enum CornerSticker {
+public enum CornerSticker {
     A_CORNER('a', Color.WHITE),
     B_CORNER('b', Color.WHITE),
     C_CORNER('c', Color.WHITE),

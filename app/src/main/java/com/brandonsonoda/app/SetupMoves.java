@@ -1,5 +1,6 @@
 package com.brandonsonoda.app;
 
+import com.brandonsonoda.model.Turn;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

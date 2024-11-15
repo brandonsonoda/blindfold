@@ -1,15 +1,17 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
+
+import com.brandonsonoda.utilities.UnsupportedCaseException;
 
 /**
  * Wrapper class around FixedRotationPieceCube that supports rotational moves.
  */
-class VariableRotationPieceCube implements Cube {
+public class VariableRotationPieceCube implements Cube {
   private final FixedRotationPieceCube delegateCube;
 
   private Color upColor;
   private Color frontColor;
 
-  VariableRotationPieceCube() {
+  public VariableRotationPieceCube() {
     this.delegateCube = new FixedRotationPieceCube();
     this.setCubeToSolved();
   }

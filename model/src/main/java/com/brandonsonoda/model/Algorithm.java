@@ -1,4 +1,4 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
 
 import static java.util.stream.Collectors.toList;
 
@@ -16,7 +16,7 @@ public enum Algorithm {
   final Type type;
   final List<Turn> turns;
 
-  enum Type {
+  public enum Type {
     MISC,
     BLINDFOLD,
     PLL

@@ -1,12 +1,13 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
 
+import com.brandonsonoda.utilities.UnsupportedCaseException;
 import java.util.List;
 import java.util.stream.Stream;
 
 /**
   * A Cube with a data representation of each individual sticker.
   */
-class StickeredCube implements Cube {
+public class StickeredCube implements Cube {
   private Color[][] state = new Color[6][9]; //nice
 
   public StickeredCube() {

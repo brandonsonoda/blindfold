@@ -1,19 +1,19 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
 
 import static java.util.stream.Collectors.toList;
 import java.util.Collections;
 
 import java.util.List;
 
-interface Cube {
+public interface Cube {
   /** Resets cube to solved state. */
-  public void setCubeToSolved();
+  void setCubeToSolved();
 
   /** Returns true if this cube is solved, false otherwise. */
-  public boolean isCubeSolved();
+  boolean isCubeSolved();
 
   /** Applies a single turn to this cube. */
-  public void apply(Turn t);
+  void apply(Turn t);
 
   /** Apply an algorithm to this cube. */
   public default void apply(Algorithm alg) {
@@ -21,13 +21,13 @@ interface Cube {
   }
 
   /** Return the color of the sticker in this location. */
-  public Color getStickerColor(EdgeSticker homeSticker);
+  Color getStickerColor(EdgeSticker homeSticker);
 
   /** Return the color of the sticker in this location. */
-  public Color getStickerColor(CornerSticker homeSticker);
+  Color getStickerColor(CornerSticker homeSticker);
 
   /** Return the color of the sticker in this location. */
-  public Color getStickerColor(Face homeSticker);
+  Color getStickerColor(Face homeSticker);
 
   /** Apply a sequence of turns to this cube. */
   public default void apply(List<Turn> turns) {

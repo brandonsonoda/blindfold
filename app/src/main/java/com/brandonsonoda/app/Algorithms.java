@@ -2,6 +2,7 @@ package com.brandonsonoda.app;
 
 import static java.util.stream.Collectors.toList;
 
+import com.brandonsonoda.model.Turn;
 import java.util.List;
 import java.util.List;
 import java.util.HashMap;

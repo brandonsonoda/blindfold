@@ -1,4 +1,6 @@
-package com.brandonsonoda.app;
+package com.brandonsonoda.model;
+
+import com.brandonsonoda.utilities.UnsupportedCaseException;
 
 class Converters {
   static Turn toBasicTurn(Face face) {
