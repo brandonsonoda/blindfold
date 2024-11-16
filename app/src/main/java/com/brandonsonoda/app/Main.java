@@ -2,6 +2,7 @@ package com.brandonsonoda.app;
 
 import com.brandonsonoda.model.Color;
 import com.brandonsonoda.model.Cube;
+import com.brandonsonoda.model.FixedRotationPieceCube;
 import com.brandonsonoda.model.StickeredCube;
 import com.brandonsonoda.model.VariableRotationPieceCube;
 import java.util.Scanner;
@@ -10,13 +11,14 @@ public class Main {
   private static final String BLIND_PREFIX = "blind: ";
 
   public static void main(String[] args) {
-    Cube c = new StickeredCube();
+    FixedRotationPieceCube c = new FixedRotationPieceCube();
     Scanner scanner = new Scanner(System.in);
     while (sneakyPrint() && scanner.hasNextLine()) {
       String line = scanner.nextLine();
       // Print the current state of the cube
       if (line.equalsIgnoreCase("print") || line.equalsIgnoreCase("ls")) {
         System.out.println(c);
+        System.out.printf("Petrus Step: %s%n", PetrusAnalyzer.getStep(c));
         continue;
       }
 
