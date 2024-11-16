@@ -166,69 +166,9 @@ public class StickeredCube extends Cube {
   }
 
   @Override
-  protected void apply(Turn t) {
-    switch (t) {
-      case U:
-        // FACE CORNERS
-        rotateFour(encodePosition(0, 0), encodePosition(0, 2), encodePosition(0, 8), encodePosition(0, 6));
-        // FACE EDGES
-        rotateFour(encodePosition(0, 1), encodePosition(0, 5), encodePosition(0, 7), encodePosition(0, 3));
-        // ADJACENT BAND
-        rotateFour(encodePosition(1, 2), encodePosition(4, 2), encodePosition(3, 2), encodePosition(2, 2));
-        rotateFour(encodePosition(1, 1), encodePosition(4, 1), encodePosition(3, 1), encodePosition(2, 1));
-        rotateFour(encodePosition(1, 0), encodePosition(4, 0), encodePosition(3, 0), encodePosition(2, 0));
-        return;
-      case R:
-        // FACE CORNERS
-        rotateFour(encodePosition(3, 0), encodePosition(3, 2), encodePosition(3, 8), encodePosition(3, 6));
-        // FACE EDGES
-        rotateFour(encodePosition(3, 1), encodePosition(3, 5), encodePosition(3, 7), encodePosition(3, 3));
-        // ADJACENT BAND
-        rotateFour(encodePosition(0, 8), encodePosition(4, 0), encodePosition(5, 8), encodePosition(2, 8));
-        rotateFour(encodePosition(0, 5), encodePosition(4, 3), encodePosition(5, 5), encodePosition(2, 5));
-        rotateFour(encodePosition(0, 2), encodePosition(4, 6), encodePosition(5, 2), encodePosition(2, 2));
-        return;
-      case F:
-        // FACE CORNERS
-        rotateFour(encodePosition(2, 0), encodePosition(2, 2), encodePosition(2, 8), encodePosition(2, 6));
-        // FACE EDGES
-        rotateFour(encodePosition(2, 1), encodePosition(2, 5), encodePosition(2, 7), encodePosition(2, 3));
-        // ADJACENT BAND
-        rotateFour(encodePosition(0, 6), encodePosition(3, 0), encodePosition(5, 2), encodePosition(1, 8));
-        rotateFour(encodePosition(0, 7), encodePosition(3, 3), encodePosition(5, 1), encodePosition(1, 5));
-        rotateFour(encodePosition(0, 8), encodePosition(3, 6), encodePosition(5, 0), encodePosition(1, 2));
-        return;
-      case L:
-        // FACE CORNERS
-        rotateFour(encodePosition(1, 0), encodePosition(1, 2), encodePosition(1, 8), encodePosition(1, 6));
-        // FACE EDGES
-        rotateFour(encodePosition(1, 1), encodePosition(1, 5), encodePosition(1, 7), encodePosition(1, 3));
-        // ADJACENT BAND
-        rotateFour(encodePosition(0, 0), encodePosition(2, 0), encodePosition(5, 0), encodePosition(4, 8));
-        rotateFour(encodePosition(0, 3), encodePosition(2, 3), encodePosition(5, 3), encodePosition(4, 5));
-        rotateFour(encodePosition(0, 6), encodePosition(2, 6), encodePosition(5, 6), encodePosition(4, 2));
-        return;
-      case B:
-        // FACE CORNERS
-        rotateFour(encodePosition(4, 0), encodePosition(4, 2), encodePosition(4, 8), encodePosition(4, 6));
-        // FACE EDGES
-        rotateFour(encodePosition(4, 1), encodePosition(4, 5), encodePosition(4, 7), encodePosition(4, 3));
-        // ADJACENT BAND
-        rotateFour(encodePosition(0, 2), encodePosition(1, 0), encodePosition(5, 6), encodePosition(3, 8));
-        rotateFour(encodePosition(0, 1), encodePosition(1, 3), encodePosition(5, 7), encodePosition(3, 5));
-        rotateFour(encodePosition(0, 0), encodePosition(1, 6), encodePosition(5, 8), encodePosition(3, 2));
-        return;
-      case D:
-        // FACE CORNERS
-        rotateFour(encodePosition(5, 0), encodePosition(5, 2), encodePosition(5, 8), encodePosition(5, 6));
-        // FACE EDGES
-        rotateFour(encodePosition(5, 1), encodePosition(5, 5), encodePosition(5, 7), encodePosition(5, 3));
-        // ADJACENT BAND
-        rotateFour(encodePosition(1, 6), encodePosition(2, 6), encodePosition(3, 6), encodePosition(4, 6));
-        rotateFour(encodePosition(1, 7), encodePosition(2, 7), encodePosition(3, 7), encodePosition(4, 7));
-        rotateFour(encodePosition(1, 8), encodePosition(2, 8), encodePosition(3, 8), encodePosition(4, 8));
-        return;
-      case x:
+  void rotateCube(Face referenceFace) {
+    switch (referenceFace) {
+      case RIGHT:
         // R FACE
         rotateFour(encodePosition(3, 0), encodePosition(3, 2), encodePosition(3, 8), encodePosition(3, 6));
         rotateFour(encodePosition(3, 1), encodePosition(3, 5), encodePosition(3, 7), encodePosition(3, 3));
@@ -248,7 +188,7 @@ public class StickeredCube extends Cube {
         rotateFour(encodePosition(0, 4), encodePosition(4, 4), encodePosition(5, 4), encodePosition(2, 4));
         rotateFour(encodePosition(0, 1), encodePosition(4, 7), encodePosition(5, 1), encodePosition(2, 1));
         return;
-      case y:
+      case UP:
         // U FACE
         rotateFour(encodePosition(0, 0), encodePosition(0, 2), encodePosition(0, 8), encodePosition(0, 6));
         rotateFour(encodePosition(0, 1), encodePosition(0, 5), encodePosition(0, 7), encodePosition(0, 3));
@@ -268,7 +208,7 @@ public class StickeredCube extends Cube {
         rotateFour(encodePosition(1, 4), encodePosition(4, 4), encodePosition(3, 4), encodePosition(2, 4));
         rotateFour(encodePosition(1, 5), encodePosition(4, 5), encodePosition(3, 5), encodePosition(2, 5));
         return;
-      case z:
+      case FRONT:
         // F FACE
         rotateFour(encodePosition(2, 0), encodePosition(2, 2), encodePosition(2, 8), encodePosition(2, 6));
         rotateFour(encodePosition(2, 1), encodePosition(2, 5), encodePosition(2, 7), encodePosition(2, 3));
@@ -288,9 +228,77 @@ public class StickeredCube extends Cube {
         rotateFour(encodePosition(0, 4), encodePosition(3, 4), encodePosition(5, 4), encodePosition(1, 4));
         rotateFour(encodePosition(0, 5), encodePosition(3, 7), encodePosition(5, 3), encodePosition(1, 1));
         return;
-      default:
-        throw new IllegalArgumentException("Not a basic turn: " + t);
     }
+
+    throw new UnsupportedCaseException(referenceFace);
+  }
+
+  @Override
+  void turnFace(Face face) {
+    switch (face) {
+      case UP:
+        // FACE CORNERS
+        rotateFour(encodePosition(0, 0), encodePosition(0, 2), encodePosition(0, 8), encodePosition(0, 6));
+        // FACE EDGES
+        rotateFour(encodePosition(0, 1), encodePosition(0, 5), encodePosition(0, 7), encodePosition(0, 3));
+        // ADJACENT BAND
+        rotateFour(encodePosition(1, 2), encodePosition(4, 2), encodePosition(3, 2), encodePosition(2, 2));
+        rotateFour(encodePosition(1, 1), encodePosition(4, 1), encodePosition(3, 1), encodePosition(2, 1));
+        rotateFour(encodePosition(1, 0), encodePosition(4, 0), encodePosition(3, 0), encodePosition(2, 0));
+        return;
+      case RIGHT:
+        // FACE CORNERS
+        rotateFour(encodePosition(3, 0), encodePosition(3, 2), encodePosition(3, 8), encodePosition(3, 6));
+        // FACE EDGES
+        rotateFour(encodePosition(3, 1), encodePosition(3, 5), encodePosition(3, 7), encodePosition(3, 3));
+        // ADJACENT BAND
+        rotateFour(encodePosition(0, 8), encodePosition(4, 0), encodePosition(5, 8), encodePosition(2, 8));
+        rotateFour(encodePosition(0, 5), encodePosition(4, 3), encodePosition(5, 5), encodePosition(2, 5));
+        rotateFour(encodePosition(0, 2), encodePosition(4, 6), encodePosition(5, 2), encodePosition(2, 2));
+        return;
+      case FRONT:
+        // FACE CORNERS
+        rotateFour(encodePosition(2, 0), encodePosition(2, 2), encodePosition(2, 8), encodePosition(2, 6));
+        // FACE EDGES
+        rotateFour(encodePosition(2, 1), encodePosition(2, 5), encodePosition(2, 7), encodePosition(2, 3));
+        // ADJACENT BAND
+        rotateFour(encodePosition(0, 6), encodePosition(3, 0), encodePosition(5, 2), encodePosition(1, 8));
+        rotateFour(encodePosition(0, 7), encodePosition(3, 3), encodePosition(5, 1), encodePosition(1, 5));
+        rotateFour(encodePosition(0, 8), encodePosition(3, 6), encodePosition(5, 0), encodePosition(1, 2));
+        return;
+      case LEFT:
+        // FACE CORNERS
+        rotateFour(encodePosition(1, 0), encodePosition(1, 2), encodePosition(1, 8), encodePosition(1, 6));
+        // FACE EDGES
+        rotateFour(encodePosition(1, 1), encodePosition(1, 5), encodePosition(1, 7), encodePosition(1, 3));
+        // ADJACENT BAND
+        rotateFour(encodePosition(0, 0), encodePosition(2, 0), encodePosition(5, 0), encodePosition(4, 8));
+        rotateFour(encodePosition(0, 3), encodePosition(2, 3), encodePosition(5, 3), encodePosition(4, 5));
+        rotateFour(encodePosition(0, 6), encodePosition(2, 6), encodePosition(5, 6), encodePosition(4, 2));
+        return;
+      case BACK:
+        // FACE CORNERS
+        rotateFour(encodePosition(4, 0), encodePosition(4, 2), encodePosition(4, 8), encodePosition(4, 6));
+        // FACE EDGES
+        rotateFour(encodePosition(4, 1), encodePosition(4, 5), encodePosition(4, 7), encodePosition(4, 3));
+        // ADJACENT BAND
+        rotateFour(encodePosition(0, 2), encodePosition(1, 0), encodePosition(5, 6), encodePosition(3, 8));
+        rotateFour(encodePosition(0, 1), encodePosition(1, 3), encodePosition(5, 7), encodePosition(3, 5));
+        rotateFour(encodePosition(0, 0), encodePosition(1, 6), encodePosition(5, 8), encodePosition(3, 2));
+        return;
+      case DOWN:
+        // FACE CORNERS
+        rotateFour(encodePosition(5, 0), encodePosition(5, 2), encodePosition(5, 8), encodePosition(5, 6));
+        // FACE EDGES
+        rotateFour(encodePosition(5, 1), encodePosition(5, 5), encodePosition(5, 7), encodePosition(5, 3));
+        // ADJACENT BAND
+        rotateFour(encodePosition(1, 6), encodePosition(2, 6), encodePosition(3, 6), encodePosition(4, 6));
+        rotateFour(encodePosition(1, 7), encodePosition(2, 7), encodePosition(3, 7), encodePosition(4, 7));
+        rotateFour(encodePosition(1, 8), encodePosition(2, 8), encodePosition(3, 8), encodePosition(4, 8));
+        return;
+    }
+
+    throw new UnsupportedCaseException(face);
   }
 
   private void rotateFour(int position1, int position2, int position3, int position4) {

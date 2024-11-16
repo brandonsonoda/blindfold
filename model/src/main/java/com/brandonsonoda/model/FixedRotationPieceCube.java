@@ -52,9 +52,14 @@ public class FixedRotationPieceCube extends Cube {
   }
 
   @Override
-  protected void apply(Turn t) {
-    switch (t) {
-      case U:
+  void rotateCube(Face referenceFace) {
+    throw new UnsupportedOperationException("FixedRotationPieceCube does not support rotation");
+  }
+
+  @Override
+  void turnFace(Face face) {
+    switch (face) {
+      case UP:
         updateCorners(
             new CornerUpdate(0, corners[3]),
             new CornerUpdate(1, corners[0]),
@@ -66,7 +71,7 @@ public class FixedRotationPieceCube extends Cube {
             new EdgeUpdate(2, edges[1]),
             new EdgeUpdate(3, edges[2]));
         return;
-      case R:
+      case RIGHT:
         updateCorners(
             new CornerUpdate(1, CornerStickers.rotateCw(corners[2])),
             new CornerUpdate(6, CornerStickers.rotateCcw(corners[1])),
@@ -78,7 +83,7 @@ public class FixedRotationPieceCube extends Cube {
             new EdgeUpdate(9, EdgeStickers.flip(edges[6])),
             new EdgeUpdate(5, edges[9]));
         return;
-      case F:
+      case FRONT:
         updateCorners(
             new CornerUpdate(3, CornerStickers.rotateCcw(corners[4])),
             new CornerUpdate(2, CornerStickers.rotateCw(corners[3])),
@@ -90,7 +95,7 @@ public class FixedRotationPieceCube extends Cube {
             new EdgeUpdate(8, EdgeStickers.flip(edges[5])),
             new EdgeUpdate(5, EdgeStickers.flip(edges[2])));
         return;
-      case L:
+      case LEFT:
         updateCorners(
             new CornerUpdate(0, CornerStickers.rotateCcw(corners[7])),
             new CornerUpdate(7, CornerStickers.rotateCw(corners[4])),
@@ -102,7 +107,7 @@ public class FixedRotationPieceCube extends Cube {
             new EdgeUpdate(11, EdgeStickers.flip(edges[4])),
             new EdgeUpdate(4, EdgeStickers.flip(edges[3])));
         return;
-      case B:
+      case BACK:
         updateCorners(
             new CornerUpdate(0, CornerStickers.rotateCw(corners[1])),
             new CornerUpdate(1, CornerStickers.rotateCcw(corners[6])),
@@ -114,7 +119,7 @@ public class FixedRotationPieceCube extends Cube {
             new EdgeUpdate(10, EdgeStickers.flip(edges[7])),
             new EdgeUpdate(7, EdgeStickers.flip(edges[0])));
         return;
-      case D:
+      case DOWN:
         updateCorners(
             new CornerUpdate(4, corners[7]),
             new CornerUpdate(7, corners[6]),
@@ -126,13 +131,9 @@ public class FixedRotationPieceCube extends Cube {
             new EdgeUpdate(10, edges[9]),
             new EdgeUpdate(9, edges[8]));
         return;
-      case x:
-      case y:
-      case z:
-        throw new UnsupportedOperationException("FixedRotationPieceCube does not support turn: " + t);
-      default:
-        throw new IllegalArgumentException("Not a basic turn: " + t);
     }
+
+    throw new UnsupportedCaseException(face);
   }
 
   @Override

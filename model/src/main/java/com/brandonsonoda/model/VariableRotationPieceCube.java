@@ -28,25 +28,28 @@ public class VariableRotationPieceCube extends Cube {
   }
 
   @Override
-  protected void apply(Turn t) {
-    switch (t) {
-      case x:
+  void rotateCube(Face referenceFace) {
+    switch (referenceFace) {
+      case RIGHT:
         this.orient(getStickerColor(Face.FRONT), getStickerColor(Face.DOWN));
         return;
-      case y:
+      case UP:
         this.orient(getStickerColor(Face.UP), getStickerColor(Face.RIGHT));
         return;
-      case z:
+      case FRONT:
         this.orient(getStickerColor(Face.LEFT), getStickerColor(Face.FRONT));
         return;
     }
 
+    throw new UnsupportedCaseException(referenceFace);
+  }
+
+  @Override
+  void turnFace(Face face) {
     // Translate relative turn to green-front white-top turn
-    Face faceToTurn = Converters.toFace(t);
-    Color colorOfFaceToTurn = getStickerColor(faceToTurn);
-    Face defaultFaceOfColorToTurn = Converters.defaultFace(colorOfFaceToTurn);
-    Turn convertedTurn = Converters.toBasicTurn(defaultFaceOfColorToTurn);
-    delegateCube.apply(convertedTurn);
+    Color relativeColor = getStickerColor(face);
+    Face defaultFaceWithThatColor = Converters.defaultFace(relativeColor);
+    delegateCube.turnFace(defaultFaceWithThatColor);
   }
 
   @Override

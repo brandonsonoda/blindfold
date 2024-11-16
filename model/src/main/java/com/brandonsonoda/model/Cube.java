@@ -12,14 +12,6 @@ public abstract class Cube {
   /** Returns true if this cube is solved, false otherwise. */
   public abstract boolean isCubeSolved();
 
-  /** Applies a single turn to this cube. */
-  protected abstract void apply(Turn t);
-
-  /** Apply an algorithm to this cube. */
-  public void apply(Algorithm alg) {
-    apply(alg.turns);
-  }
-
   /** Return the color of the sticker in this location. */
   public abstract Color getStickerColor(EdgeSticker homeSticker);
 
@@ -32,10 +24,15 @@ public abstract class Cube {
   /** Apply a sequence of turns to this cube. */
   public void apply(List<Turn> turns) {
     for (Turn turn : turns) {
-      for (Turn basicTurn : turn.basicTurns) {
-        apply(basicTurn);
+      for (CubeMutation mutation : turn.mutations) {
+        mutation.apply(this);
       }
     }
+  }
+
+  /** Apply an algorithm to this cube. */
+  public void apply(Algorithm alg) {
+    apply(alg.turns);
   }
 
   /** Undos application of a sequence of turns to this cube. */
@@ -48,5 +45,11 @@ public abstract class Cube {
 
     apply(reversedTurns);
   }
+
+  /** Rotate this cube clockwise as if looking at referenceFace. */
+  abstract void rotateCube(Face referenceFace);
+
+  /** Turn specific face 90 clockwise. */
+  abstract void turnFace(Face face);
 
 }
