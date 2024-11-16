@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 /**
   * A Cube with a data representation of each individual sticker.
   */
-public class StickeredCube implements Cube {
+public class StickeredCube extends Cube {
   private Color[][] state = new Color[6][9]; //nice
 
   public StickeredCube() {
@@ -166,7 +166,7 @@ public class StickeredCube implements Cube {
   }
 
   @Override
-  public void apply(Turn t) {
+  protected void apply(Turn t) {
     switch (t) {
       case U:
         // FACE CORNERS

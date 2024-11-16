@@ -9,7 +9,7 @@ import java.util.Arrays;
  *
  * See https://www.speedsolving.com/wiki/index.php?title=Speffz
  */
-public class FixedRotationPieceCube implements Cube {
+public class FixedRotationPieceCube extends Cube {
   // Tracking of the minimal number of edge stickers
   // {A, B, C, D, F, J, N, R, U, V, W, X}
   private final EdgeSticker[] edges = new EdgeSticker[12];
@@ -52,7 +52,7 @@ public class FixedRotationPieceCube implements Cube {
   }
 
   @Override
-  public void apply(Turn t) {
+  protected void apply(Turn t) {
     switch (t) {
       case U:
         updateCorners(

@@ -5,32 +5,32 @@ import java.util.Collections;
 
 import java.util.List;
 
-public interface Cube {
+public abstract class Cube {
   /** Resets cube to solved state. */
-  void setCubeToSolved();
+  public abstract void setCubeToSolved();
 
   /** Returns true if this cube is solved, false otherwise. */
-  boolean isCubeSolved();
+  public abstract boolean isCubeSolved();
 
   /** Applies a single turn to this cube. */
-  void apply(Turn t);
+  protected abstract void apply(Turn t);
 
   /** Apply an algorithm to this cube. */
-  public default void apply(Algorithm alg) {
+  public void apply(Algorithm alg) {
     apply(alg.turns);
   }
 
   /** Return the color of the sticker in this location. */
-  Color getStickerColor(EdgeSticker homeSticker);
+  public abstract Color getStickerColor(EdgeSticker homeSticker);
 
   /** Return the color of the sticker in this location. */
-  Color getStickerColor(CornerSticker homeSticker);
+  public abstract Color getStickerColor(CornerSticker homeSticker);
 
   /** Return the color of the sticker in this location. */
-  Color getStickerColor(Face homeSticker);
+  public abstract Color getStickerColor(Face homeSticker);
 
   /** Apply a sequence of turns to this cube. */
-  public default void apply(List<Turn> turns) {
+  public void apply(List<Turn> turns) {
     for (Turn turn : turns) {
       for (Turn basicTurn : turn.basicTurns) {
         apply(basicTurn);
@@ -39,7 +39,7 @@ public interface Cube {
   }
 
   /** Undos application of a sequence of turns to this cube. */
-  public default void undo(List<Turn> turns) {
+  public void undo(List<Turn> turns) {
     List<Turn> reversedTurns =
       turns.stream()
       .map(Turn::reverse)

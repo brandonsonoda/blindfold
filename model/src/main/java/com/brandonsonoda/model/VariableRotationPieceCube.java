@@ -5,7 +5,7 @@ import com.brandonsonoda.utilities.UnsupportedCaseException;
 /**
  * Wrapper class around FixedRotationPieceCube that supports rotational moves.
  */
-public class VariableRotationPieceCube implements Cube {
+public class VariableRotationPieceCube extends Cube {
   private final FixedRotationPieceCube delegateCube;
 
   private Color upColor;
@@ -28,7 +28,7 @@ public class VariableRotationPieceCube implements Cube {
   }
 
   @Override
-  public void apply(Turn t) {
+  protected void apply(Turn t) {
     switch (t) {
       case x:
         this.orient(getStickerColor(Face.FRONT), getStickerColor(Face.DOWN));
