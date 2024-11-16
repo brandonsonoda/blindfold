@@ -12,17 +12,27 @@ public abstract class Cube {
   /** Returns true if this cube is solved, false otherwise. */
   public abstract boolean isCubeSolved();
 
-  /** Return the color of the sticker in this location. */
-  public abstract Color getStickerColor(EdgeSticker homeSticker);
+  /** Return the sticker that is currently in the provided location. */
+  public abstract EdgeSticker getSticker(EdgeSticker homeSticker);
 
-  /** Return the color of the sticker in this location. */
-  public abstract Color getStickerColor(CornerSticker homeSticker);
+  /** Return the color of the sticker in the provided location. */
+  public Color getStickerColor(EdgeSticker homeSticker) {
+    return getSticker(homeSticker).color;
+  }
 
-  /** Return the color of the sticker in this location. */
+  /** Return the sticker that is currently in the provided location. */
+  public abstract CornerSticker getSticker(CornerSticker homeSticker);
+
+  /** Return the color of the sticker in the provided location. */
+  public Color getStickerColor(CornerSticker homeSticker) {
+    return getSticker(homeSticker).color;
+  }
+
+  /** Return the color of the sticker in the provided location. */
   public abstract Color getStickerColor(Face homeSticker);
 
   /** Apply a sequence of turns to this cube. */
-  public void apply(List<Turn> turns) {
+  public final void apply(List<Turn> turns) {
     for (Turn turn : turns) {
       for (CubeMutation mutation : turn.mutations) {
         mutation.apply(this);
@@ -31,12 +41,12 @@ public abstract class Cube {
   }
 
   /** Apply an algorithm to this cube. */
-  public void apply(Algorithm alg) {
+  public final void apply(Algorithm alg) {
     apply(alg.turns);
   }
 
   /** Undos application of a sequence of turns to this cube. */
-  public void undo(List<Turn> turns) {
+  public final void undo(List<Turn> turns) {
     List<Turn> reversedTurns =
       turns.stream()
       .map(Turn::reverse)

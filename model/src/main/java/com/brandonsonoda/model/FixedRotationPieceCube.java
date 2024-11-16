@@ -148,7 +148,8 @@ public class FixedRotationPieceCube extends Cube {
     return serializedCube.toString();
   }
 
-  private EdgeSticker getSticker(EdgeSticker homeSticker) {
+  @Override
+  public EdgeSticker getSticker(EdgeSticker homeSticker) {
     switch (homeSticker) {
       case A_EDGE:
         return edges[0];
@@ -180,11 +181,7 @@ public class FixedRotationPieceCube extends Cube {
   }
 
   @Override
-  public Color getStickerColor(EdgeSticker homeSticker) {
-    return getSticker(homeSticker).color;
-  }
-
-  private CornerSticker getSticker(CornerSticker homeSticker) {
+  public CornerSticker getSticker(CornerSticker homeSticker) {
     switch (homeSticker) {
       case A_CORNER:
         return corners[0];
@@ -205,11 +202,6 @@ public class FixedRotationPieceCube extends Cube {
     }
 
     return CornerStickers.rotateCcw(getSticker(CornerStickers.rotateCw(homeSticker)));
-  }
-
-  @Override
-  public Color getStickerColor(CornerSticker homeSticker) {
-    return getSticker(homeSticker).color;
   }
 
   @Override

@@ -46,20 +46,20 @@ public class VariableRotationPieceCube extends Cube {
 
   @Override
   void turnFace(Face face) {
-    // Translate relative turn to green-front white-top turn
+    // Translate relative face to green-front white-top face
     Color relativeColor = getStickerColor(face);
     Face defaultFaceWithThatColor = Converters.defaultFace(relativeColor);
     delegateCube.turnFace(defaultFaceWithThatColor);
   }
 
   @Override
-  public Color getStickerColor(EdgeSticker homeSticker) {
-    return delegateCube.getStickerColor(getTranslatedSticker(homeSticker));
+  public EdgeSticker getSticker(EdgeSticker homeSticker) {
+    return delegateCube.getSticker(getTranslatedSticker(homeSticker));
   }
 
   @Override
-  public Color getStickerColor(CornerSticker homeSticker) {
-    return delegateCube.getStickerColor(getTranslatedSticker(homeSticker));
+  public CornerSticker getSticker(CornerSticker homeSticker) {
+    return delegateCube.getSticker(getTranslatedSticker(homeSticker));
   }
 
   @Override

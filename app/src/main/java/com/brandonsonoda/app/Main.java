@@ -1,15 +1,16 @@
 package com.brandonsonoda.app;
 
-import com.brandonsonoda.model.Cube;
-import com.brandonsonoda.model.VariableRotationPieceCube;
 import com.brandonsonoda.model.Color;
+import com.brandonsonoda.model.Cube;
+import com.brandonsonoda.model.StickeredCube;
+import com.brandonsonoda.model.VariableRotationPieceCube;
 import java.util.Scanner;
 
 public class Main {
   private static final String BLIND_PREFIX = "blind: ";
 
   public static void main(String[] args) {
-    Cube c = new VariableRotationPieceCube();
+    Cube c = new StickeredCube();
     Scanner scanner = new Scanner(System.in);
     while (sneakyPrint() && scanner.hasNextLine()) {
       String line = scanner.nextLine();

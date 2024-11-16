@@ -34,6 +34,69 @@ public class StickeredCube extends Cube {
   }
 
   @Override
+  public Color getStickerColor(EdgeSticker homeSticker) {
+    switch (homeSticker) {
+      case A_EDGE:
+        return state[0][1];
+      case B_EDGE:
+        return state[0][5];
+      case C_EDGE:
+        return state[0][7];
+      case D_EDGE:
+        return state[0][3];
+      case E_EDGE:
+        return state[1][1];
+      case F_EDGE:
+        return state[1][5];
+      case G_EDGE:
+        return state[1][7];
+      case H_EDGE:
+        return state[1][3];
+      case I_EDGE:
+        return state[2][1];
+      case J_EDGE:
+        return state[2][5];
+      case K_EDGE:
+        return state[2][7];
+      case L_EDGE:
+        return state[2][3];
+      case M_EDGE:
+        return state[3][1];
+      case N_EDGE:
+        return state[3][5];
+      case O_EDGE:
+        return state[3][7];
+      case P_EDGE:
+        return state[3][3];
+      case Q_EDGE:
+        return state[4][1];
+      case R_EDGE:
+        return state[4][5];
+      case S_EDGE:
+        return state[4][7];
+      case T_EDGE:
+        return state[4][3];
+      case U_EDGE:
+        return state[5][1];
+      case V_EDGE:
+        return state[5][5];
+      case W_EDGE:
+        return state[5][7];
+      case X_EDGE:
+        return state[5][3];
+    }
+
+    throw new UnsupportedCaseException(homeSticker);
+  }
+
+  @Override
+  public EdgeSticker getSticker(EdgeSticker homeSticker) {
+    Color primaryEdgeColor = this.getStickerColor(homeSticker);
+    Color secondaryEdgeColor = this.getStickerColor(EdgeStickers.flip(homeSticker));
+    return EdgeStickers.identifyEdge(primaryEdgeColor, secondaryEdgeColor);
+  }
+
+  @Override
   public Color getStickerColor(CornerSticker homeSticker) {
     switch (homeSticker) {
       case A_CORNER:
@@ -90,60 +153,13 @@ public class StickeredCube extends Cube {
   }
 
   @Override
-  public Color getStickerColor(EdgeSticker homeSticker) {
-    switch (homeSticker) {
-      case A_EDGE:
-        return state[0][1];
-      case B_EDGE:
-        return state[0][5];
-      case C_EDGE:
-        return state[0][7];
-      case D_EDGE:
-        return state[0][3];
-      case E_EDGE:
-        return state[1][1];
-      case F_EDGE:
-        return state[1][5];
-      case G_EDGE:
-        return state[1][7];
-      case H_EDGE:
-        return state[1][3];
-      case I_EDGE:
-        return state[2][1];
-      case J_EDGE:
-        return state[2][5];
-      case K_EDGE:
-        return state[2][7];
-      case L_EDGE:
-        return state[2][3];
-      case M_EDGE:
-        return state[3][1];
-      case N_EDGE:
-        return state[3][5];
-      case O_EDGE:
-        return state[3][7];
-      case P_EDGE:
-        return state[3][3];
-      case Q_EDGE:
-        return state[4][1];
-      case R_EDGE:
-        return state[4][5];
-      case S_EDGE:
-        return state[4][7];
-      case T_EDGE:
-        return state[4][3];
-      case U_EDGE:
-        return state[5][1];
-      case V_EDGE:
-        return state[5][5];
-      case W_EDGE:
-        return state[5][7];
-      case X_EDGE:
-        return state[5][3];
-    }
+  public CornerSticker getSticker(CornerSticker homeSticker) {
+    Color primaryCornerColor = this.getStickerColor(homeSticker);
+    Color secondaryCornerColor = this.getStickerColor(CornerStickers.rotateCcw(homeSticker));
 
-    throw new UnsupportedCaseException(homeSticker);
+    return CornerStickers.identifyCorner(primaryCornerColor, secondaryCornerColor);
   }
+
 
   @Override
   public Color getStickerColor(Face homeSticker) {
