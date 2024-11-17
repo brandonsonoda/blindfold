@@ -1,12 +1,5 @@
-# Gradle
-build/
-.gradle/
-
 # vim classes
 *.swp
-
-# Compiled class file
-*.class
 
 # Log file
 *.log
@@ -18,7 +11,6 @@ build/
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -31,7 +23,7 @@ hs_err_pid*
 replay_pid*
 
 # Ignore Gradle project-specific cache directory
-.gradle
+.gradle/
 
 # Ignore Gradle build output directory
 build
