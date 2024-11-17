@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation("com.google.guava:guava:33.3.1-jre")
     implementation("org.apache.commons:commons-text")
     implementation(project(":model"))
     implementation(project(":utilities"))

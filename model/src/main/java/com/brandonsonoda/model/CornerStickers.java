@@ -1,6 +1,7 @@
 package com.brandonsonoda.model;
 
 import com.brandonsonoda.utilities.UnsupportedCaseException;
+import com.google.common.collect.ImmutableSet;
 
 public final class CornerStickers {
   public static CornerSticker rotateCw(CornerSticker original) {
@@ -193,5 +194,48 @@ public final class CornerStickers {
     }
 
     throw new IllegalStateException(String.format("Unexpected corner sticker combination: %s-%s", stickerColor, ccwStickerColor));
+  }
+
+  public static ImmutableSet<CornerSticker> getCornersOnFace(Face face) {
+    switch (face) {
+      case UP:
+        return ImmutableSet.of(
+            CornerSticker.A_CORNER,
+            CornerSticker.B_CORNER,
+            CornerSticker.C_CORNER,
+            CornerSticker.D_CORNER);
+      case LEFT:
+        return ImmutableSet.of(
+            CornerSticker.E_CORNER,
+            CornerSticker.F_CORNER,
+            CornerSticker.G_CORNER,
+            CornerSticker.H_CORNER);
+      case FRONT:
+        return ImmutableSet.of(
+            CornerSticker.I_CORNER,
+            CornerSticker.J_CORNER,
+            CornerSticker.K_CORNER,
+            CornerSticker.L_CORNER);
+      case RIGHT:
+        return ImmutableSet.of(
+            CornerSticker.M_CORNER,
+            CornerSticker.N_CORNER,
+            CornerSticker.O_CORNER,
+            CornerSticker.P_CORNER);
+      case BACK:
+        return ImmutableSet.of(
+            CornerSticker.Q_CORNER,
+            CornerSticker.R_CORNER,
+            CornerSticker.S_CORNER,
+            CornerSticker.T_CORNER);
+      case DOWN:
+        return ImmutableSet.of(
+            CornerSticker.U_CORNER,
+            CornerSticker.V_CORNER,
+            CornerSticker.W_CORNER,
+            CornerSticker.X_CORNER);
+    }
+
+    throw new UnsupportedCaseException(face);
   }
 }

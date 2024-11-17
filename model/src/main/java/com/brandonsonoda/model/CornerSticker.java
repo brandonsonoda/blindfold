@@ -26,8 +26,8 @@ public enum CornerSticker {
     W_CORNER('w', Color.YELLOW),
     X_CORNER('x', Color.YELLOW);
 
-    final char serializedCharacter;
-    final Color color;
+    public final char serializedCharacter;
+    public final Color color;
 
     CornerSticker(char serializedCharacter, Color color) {
       this.serializedCharacter = serializedCharacter;

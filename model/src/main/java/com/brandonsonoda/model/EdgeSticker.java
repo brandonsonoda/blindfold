@@ -26,8 +26,8 @@ public enum EdgeSticker {
     W_EDGE('W', Color.YELLOW),
     X_EDGE('X', Color.YELLOW);
 
-    final char serializedCharacter;
-    final Color color;
+    public final char serializedCharacter;
+    public final Color color;
 
     EdgeSticker(char serializedCharacter, Color color) {
       this.serializedCharacter = serializedCharacter;

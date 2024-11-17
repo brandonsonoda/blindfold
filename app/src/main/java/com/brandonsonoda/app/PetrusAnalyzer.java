@@ -3,6 +3,7 @@ package com.brandonsonoda.app;
 import com.brandonsonoda.model.Color;
 import com.brandonsonoda.model.CornerSticker;
 import com.brandonsonoda.model.EdgeSticker;
+import com.brandonsonoda.model.EdgeStickers;
 import com.brandonsonoda.model.Face;
 import com.brandonsonoda.model.FixedRotationPieceCube;
 import com.brandonsonoda.model.Cube;
@@ -130,9 +131,27 @@ class PetrusAnalyzer {
   }
 
   private static boolean checkEo(Cube cube, Face face1, Face face2) {
-    // TODO for each edge, return edge = a color || not equals b color and vice versa
-    // Consider adding a EdgeStickers and CornerStickers fn to get all stickers with touching face (good chance to import immutableSet)
-    return false;
+    Color color1 = cube.getStickerColor(face1);
+    Color color2 = cube.getStickerColor(face2);
+
+    return !faceHasBadEdges(cube, face1, color1, color2)
+      && !faceHasBadEdges(cube, face2, color2, color1);
+  }
+
+  /**
+    * Check if a face has bad edges.
+    *
+    * An edge is bad:
+    * - if the cubie has the color of the face on it, but is not facing up relative to the given face
+    * - if the cubie has the color of the other face on it, but is facing up relative to the given face
+    */
+  private static boolean faceHasBadEdges(Cube cube, Face thisFace, Color thisColor, Color otherColor) {
+    return EdgeStickers.getEdgesOnFace(thisFace)
+      .stream()
+      .map(cube::getSticker)
+      .anyMatch(sticker -> {
+          return EdgeStickers.flip(sticker).color == thisColor || sticker.color == otherColor;
+      });
   }
 
   private static Step checkF2lAndOll(FixedRotationPieceCube cube) {

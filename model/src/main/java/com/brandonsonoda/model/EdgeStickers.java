@@ -1,6 +1,7 @@
 package com.brandonsonoda.model;
 
 import com.brandonsonoda.utilities.UnsupportedCaseException;
+import com.google.common.collect.ImmutableSet;
 
 public final class EdgeStickers {
   public static EdgeSticker flip(EdgeSticker original) {
@@ -138,5 +139,48 @@ public final class EdgeStickers {
     }
 
     throw new IllegalStateException(String.format("Unexpected edge sticker combination: %s-%s", stickerColor, oppositeColor));
+  }
+
+  public static ImmutableSet<EdgeSticker> getEdgesOnFace(Face face) {
+    switch (face) {
+      case UP:
+        return ImmutableSet.of(
+            EdgeSticker.A_EDGE,
+            EdgeSticker.B_EDGE,
+            EdgeSticker.C_EDGE,
+            EdgeSticker.D_EDGE);
+      case LEFT:
+        return ImmutableSet.of(
+            EdgeSticker.E_EDGE,
+            EdgeSticker.F_EDGE,
+            EdgeSticker.G_EDGE,
+            EdgeSticker.H_EDGE);
+      case FRONT:
+        return ImmutableSet.of(
+            EdgeSticker.I_EDGE,
+            EdgeSticker.J_EDGE,
+            EdgeSticker.K_EDGE,
+            EdgeSticker.L_EDGE);
+      case RIGHT:
+        return ImmutableSet.of(
+            EdgeSticker.M_EDGE,
+            EdgeSticker.N_EDGE,
+            EdgeSticker.O_EDGE,
+            EdgeSticker.P_EDGE);
+      case BACK:
+        return ImmutableSet.of(
+            EdgeSticker.Q_EDGE,
+            EdgeSticker.R_EDGE,
+            EdgeSticker.S_EDGE,
+            EdgeSticker.T_EDGE);
+      case DOWN:
+        return ImmutableSet.of(
+            EdgeSticker.U_EDGE,
+            EdgeSticker.V_EDGE,
+            EdgeSticker.W_EDGE,
+            EdgeSticker.X_EDGE);
+    }
+
+    throw new UnsupportedCaseException(face);
   }
 }
