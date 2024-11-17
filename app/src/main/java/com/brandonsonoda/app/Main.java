@@ -11,20 +11,21 @@ public class Main {
   private static final String BLIND_PREFIX = "blind: ";
 
   public static void main(String[] args) {
-    FixedRotationPieceCube c = new FixedRotationPieceCube();
+    FixedRotationPieceCube underlyingCube = new FixedRotationPieceCube();
+    Cube cube = new VariableRotationPieceCube(underlyingCube);
     Scanner scanner = new Scanner(System.in);
     while (sneakyPrint() && scanner.hasNextLine()) {
       String line = scanner.nextLine();
       // Print the current state of the cube
       if (line.equalsIgnoreCase("print") || line.equalsIgnoreCase("ls")) {
-        System.out.println(c);
-        System.out.printf("Petrus Step: %s%n", PetrusAnalyzer.getStep(c));
+        System.out.println(cube);
+        System.out.printf("Petrus Step: %s%n", PetrusAnalyzer.getStep(underlyingCube));
         continue;
       }
 
       // Return the current cube to the solved position
       if (line.equalsIgnoreCase("clear")) {
-        c.setCubeToSolved();
+        cube.setCubeToSolved();
         continue;
       }
 
@@ -42,19 +43,19 @@ public class Main {
 
       // Returns true if the cube is solved, false otherwise
       if (line.equalsIgnoreCase("is_solved")) {
-        System.out.println(c.isCubeSolved());
+        System.out.println(cube.isCubeSolved());
         continue;
       }
 
       // Applies blind solving notation to the cube
       if (line.toLowerCase().startsWith(BLIND_PREFIX.toLowerCase())) {
-        Blindfold.apply(c, line.substring(BLIND_PREFIX.length()));
+        Blindfold.apply(cube, line.substring(BLIND_PREFIX.length()));
         continue;
       }
 
       // Default apply notation to the cube
       try {
-        c.apply(Algorithms.compile(line));
+        cube.apply(Algorithms.compile(line));
       } catch (IllegalArgumentException e) {
         System.out.println("invalid notation");
       } catch (Exception e) {

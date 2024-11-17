@@ -2,11 +2,14 @@ package com.brandonsonoda.app;
 
 import com.brandonsonoda.model.Color;
 import com.brandonsonoda.model.CornerSticker;
+import com.brandonsonoda.model.CornerStickers;
 import com.brandonsonoda.model.EdgeSticker;
 import com.brandonsonoda.model.EdgeStickers;
 import com.brandonsonoda.model.Face;
 import com.brandonsonoda.model.FixedRotationPieceCube;
 import com.brandonsonoda.model.Cube;
+import com.google.common.collect.ImmutableMap;
+import java.util.stream.Stream;
 
 class PetrusAnalyzer {
     private static final String A_CORNER_2x2 = "A..D...R....a.......";
@@ -17,6 +20,22 @@ class PetrusAnalyzer {
     private static final String V_CORNER_2x2 = ".....J..UV.......v..";
     private static final String W_CORNER_2x2 = "......N..VW,......w.";
     private static final String X_CORNER_2x2 = ".......R..WX.......x";
+
+    private static final String WHITE_F2L = "ABCDFJNR....abcd....";
+    private static final String ORANGE_F2L = "A.CDF..RU.WXa..du..x";
+    private static final String GREEN_F2L = ".BCDFJ..UV.X..cduv..";
+    private static final String RED_F2L = "ABC..JN.UVW..bc..vw.";
+    private static final String BLUE_F2L = "AB.D..NR.VWXab....wx";
+    private static final String YELLOW_F2L = "....FJNRUVWX....uvwx";
+
+    private static final ImmutableMap<Face, String> LAST_LAYER_TO_F2L =
+      ImmutableMap.of(
+          Face.UP, YELLOW_F2L,
+          Face.LEFT, RED_F2L,
+          Face.FRONT, BLUE_F2L,
+          Face.RIGHT, ORANGE_F2L,
+          Face.BACK, GREEN_F2L,
+          Face.DOWN, WHITE_F2L);
 
   enum Step {
     UNKNOWN,
@@ -155,7 +174,25 @@ class PetrusAnalyzer {
   }
 
   private static Step checkF2lAndOll(FixedRotationPieceCube cube) {
-    // Check all faces + top layer
+    String serializedCube = cube.serialize();
+
+    for (Face face : Face.values()) {
+      if (serializedCube.matches(LAST_LAYER_TO_F2L.get(face))) {
+        return allStickersMatch(cube, face) ? Step.OLL_COMPLETE : Step.F2L_COMPLETE;
+      }
+    }
+
     return Step.UNKNOWN;
+  }
+
+  private static boolean allStickersMatch(Cube cube, Face face) {
+    Color centerColor = cube.getStickerColor(face);
+
+    return Stream.concat(
+        EdgeStickers.getEdgesOnFace(face).stream()
+        .map(cube::getStickerColor),
+        CornerStickers.getCornersOnFace(face).stream()
+        .map(cube::getStickerColor))
+    .allMatch(stickerColor -> stickerColor == centerColor);
   }
 }

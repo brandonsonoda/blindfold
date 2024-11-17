@@ -11,9 +11,13 @@ public class VariableRotationPieceCube extends Cube {
   private Color upColor;
   private Color frontColor;
 
-  public VariableRotationPieceCube() {
-    this.delegateCube = new FixedRotationPieceCube();
+  public VariableRotationPieceCube(FixedRotationPieceCube delegateCube) {
+    this.delegateCube = delegateCube;
     this.setCubeToSolved();
+  }
+
+  public VariableRotationPieceCube() {
+    this(new FixedRotationPieceCube());
   }
 
   @Override
